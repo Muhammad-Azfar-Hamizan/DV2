@@ -5,67 +5,119 @@
   "data": {
     "url": "data/uv_seasonal_heatmap.csv"
   },
-  "mark": {
-    "type": "rect",
-    "stroke": "#ffffff",
-    "strokeWidth": 1.2
-  },
-  "encoding": {
-    "x": {
-      "field": "month_num",
-      "type": "ordinal",
-      "title": "Month",
-      "sort": [1,2,3,4,5,6,7,8,9,10,11,12],
-      "axis": {
-        "titleFontSize": 11,
-        "titleColor": "#555555",
-        "labelFontSize": 9,
-        "labelColor": "#555555",
-        "domainColor": "#cccccc",
-        "tickColor": "#cccccc",
-        "labelExpr": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value - 1]"
-      }
-    },
-    "y": {
-      "field": "state",
-      "type": "nominal",
-      "title": null,
-      "sort": ["Selangor","Perlis","Pahang","Sabah","Sarawak","Melaka","Perak","Kedah","Pulau Pinang","Johor","Terengganu","Kelantan","Kuala Lumpur","Putrajaya","Labuan","Negeri Sembilan"],
-      "axis": {
-        "labelFontSize": 9.5,
-        "labelColor": "#333333",
-        "domainColor": "#cccccc",
-        "tickColor": "#cccccc"
-      }
-    },
-    "color": {
-      "field": "avg_uv",
-      "type": "quantitative",
-      "title": "Average Peak UV Index",
-      "scale": {
-        "scheme": "yelloworangered",
-        "domain": [7, 15]
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fdf3cc",
+        "strokeWidth": 1.5,
+        "cornerRadius": 2
       },
-      "legend": {
-        "title": "Average Peak UV Index",
-        "titleFontSize": 9.5,
-        "labelFontSize": 9,
-        "titleColor": "#1a1a1a",
-        "labelColor": "#555555",
-        "orient": "bottom",
-        "direction": "horizontal",
-        "gradientLength": 260,
-        "gradientThickness": 10,
-        "offset": 8,
-        "titlePadding": 5
+      "transform": [
+        {
+          "calculate": "datum.avg_uv < 8 ? 'High (< 8)' : datum.avg_uv < 11 ? 'Very High (8–10)' : datum.avg_uv < 13 ? 'Extreme (11–12)' : 'Extreme (13+)'",
+          "as": "uv_bin"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "month_num",
+          "type": "ordinal",
+          "title": "Month",
+          "sort": [1,2,3,4,5,6,7,8,9,10,11,12],
+          "axis": {
+            "titleFontSize": 11,
+            "titleColor": "#555555",
+            "labelFontSize": 9,
+            "labelColor": "#555555",
+            "domainColor": "#cccccc",
+            "tickColor": "#cccccc",
+            "grid": false,
+            "labelExpr": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value - 1]"
+          }
+        },
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": null,
+          "sort": ["Selangor","Perlis","Pahang","Sabah","Sarawak","Melaka","Perak","Kedah","Pulau Pinang","Johor","Terengganu","Kelantan","Kuala Lumpur","Putrajaya","Labuan","Negeri Sembilan"],
+          "axis": {
+            "labelFontSize": 9.5,
+            "labelColor": "#333333",
+            "domainColor": "#cccccc",
+            "tickColor": "#cccccc",
+            "grid": false
+          }
+        },
+        "color": {
+          "field": "uv_bin",
+          "type": "ordinal",
+          "scale": {
+            "domain": ["High (< 8)", "Very High (8–10)", "Extreme (11–12)", "Extreme (13+)"],
+            "range": ["#fee391", "#fe9929", "#d7301f", "#7f0000"]
+          },
+          "legend": {
+            "title": "Average Peak UV Index",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "titleFontSize": 9.5,
+            "labelFontSize": 9,
+            "titlePadding": 6,
+            "offset": 8,
+            "symbolType": "square",
+            "symbolSize": 150
+          }
+        },
+        "tooltip": [
+          { "field": "state",   "type": "nominal",      "title": "State" },
+          { "field": "month",   "type": "nominal",       "title": "Month" },
+          { "field": "avg_uv",  "type": "quantitative",  "title": "Average Peak UV Index", "format": ".1f" },
+          { "field": "uv_bin",  "type": "nominal",       "title": "WHO Risk Category" }
+        ]
       }
     },
-    "tooltip": [
-      { "field": "state",    "type": "nominal",      "title": "State" },
-      { "field": "month",    "type": "nominal",       "title": "Month" },
-      { "field": "avg_uv",   "type": "quantitative",  "title": "Average Peak UV Index", "format": ".1f" }
-    ]
-  },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 7.5,
+        "fontWeight": "normal",
+        "baseline": "middle",
+        "align": "center"
+      },
+      "transform": [
+        {
+          "calculate": "datum.avg_uv < 8 ? 'High (< 8)' : datum.avg_uv < 11 ? 'Very High (8–10)' : datum.avg_uv < 13 ? 'Extreme (11–12)' : 'Extreme (13+)'",
+          "as": "uv_bin"
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "month_num",
+          "type": "ordinal",
+          "sort": [1,2,3,4,5,6,7,8,9,10,11,12]
+        },
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": ["Selangor","Perlis","Pahang","Sabah","Sarawak","Melaka","Perak","Kedah","Pulau Pinang","Johor","Terengganu","Kelantan","Kuala Lumpur","Putrajaya","Labuan","Negeri Sembilan"]
+        },
+        "text": {
+          "field": "avg_uv",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.uv_bin === 'Extreme (13+)' || datum.uv_bin === 'Extreme (11–12)'",
+            "value": "#ffffff"
+          },
+          "value": "#4a2000"
+        }
+      }
+    }
+  ],
   "config": {
     "background": "transparent",
     "view": { "stroke": null },
