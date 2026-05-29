@@ -1,0 +1,81 @@
+state,rank,uv,month,year,when,month_num
+Johor,1,17.0,February,2022,February 2022,2
+Johor,2,15.0,February,2024,February 2024,2
+Johor,3,15.0,October,2023,October 2023,10
+Johor,4,15.0,October,2022,October 2022,10
+Johor,5,15.0,October,2021,October 2021,10
+Kedah,1,16.0,March,2024,March 2024,3
+Kedah,2,16.0,March,2021,March 2021,3
+Kedah,3,16.0,March,2015,March 2015,3
+Kedah,4,15.0,February,2021,February 2021,2
+Kedah,5,15.0,February,2020,February 2020,2
+Kelantan,1,16.0,February,2021,February 2021,2
+Kelantan,2,16.0,October,2021,October 2021,10
+Kelantan,3,16.0,March,2015,March 2015,3
+Kelantan,4,14.0,March,2024,March 2024,3
+Kelantan,5,14.0,April,2024,April 2024,4
+Kuala Lumpur,1,15.0,January,2024,January 2024,1
+Kuala Lumpur,2,15.0,February,2024,February 2024,2
+Kuala Lumpur,3,15.0,March,2024,March 2024,3
+Kuala Lumpur,4,15.0,April,2024,April 2024,4
+Kuala Lumpur,5,15.0,January,2023,January 2023,1
+Labuan,1,16.0,October,2015,October 2015,10
+Labuan,2,14.0,March,2024,March 2024,3
+Labuan,3,14.0,August,2024,August 2024,8
+Labuan,4,14.0,March,2023,March 2023,3
+Labuan,5,14.0,September,2023,September 2023,9
+Melaka,1,16.0,August,2021,August 2021,8
+Melaka,2,15.0,October,2023,October 2023,10
+Melaka,3,15.0,April,2022,April 2022,4
+Melaka,4,15.0,May,2022,May 2022,5
+Melaka,5,15.0,June,2022,June 2022,6
+Negeri Sembilan,1,20.0,May,2023,May 2023,5
+Negeri Sembilan,2,16.0,August,2023,August 2023,8
+Negeri Sembilan,3,13.0,July,2023,July 2023,7
+Negeri Sembilan,4,10.0,February,2023,February 2023,2
+Negeri Sembilan,5,9.0,January,2024,January 2024,1
+Pahang,1,15.0,January,2024,January 2024,1
+Pahang,2,15.0,February,2024,February 2024,2
+Pahang,3,15.0,May,2024,May 2024,5
+Pahang,4,15.0,June,2024,June 2024,6
+Pahang,5,15.0,January,2023,January 2023,1
+Perak,1,14.0,February,2024,February 2024,2
+Perak,2,14.0,March,2024,March 2024,3
+Perak,3,14.0,April,2024,April 2024,4
+Perak,4,14.0,August,2024,August 2024,8
+Perak,5,14.0,February,2023,February 2023,2
+Perlis,1,15.0,April,2024,April 2024,4
+Perlis,2,15.0,July,2023,July 2023,7
+Perlis,3,15.0,August,2023,August 2023,8
+Perlis,4,15.0,August,2022,August 2022,8
+Perlis,5,14.0,June,2024,June 2024,6
+Pulau Pinang,1,16.0,March,2023,March 2023,3
+Pulau Pinang,2,16.0,October,2021,October 2021,10
+Pulau Pinang,3,15.0,August,2024,August 2024,8
+Pulau Pinang,4,15.0,April,2023,April 2023,4
+Pulau Pinang,5,15.0,May,2023,May 2023,5
+Putrajaya,1,15.0,June,2022,June 2022,6
+Putrajaya,2,15.0,October,2022,October 2022,10
+Putrajaya,3,14.0,April,2022,April 2022,4
+Putrajaya,4,12.0,September,2022,September 2022,9
+Putrajaya,5,11.0,February,2023,February 2023,2
+Sabah,1,15.0,January,2024,January 2024,1
+Sabah,2,15.0,May,2021,May 2021,5
+Sabah,3,15.0,June,2021,June 2021,6
+Sabah,4,15.0,November,2020,November 2020,11
+Sabah,5,14.0,February,2024,February 2024,2
+Sarawak,1,15.0,February,2023,February 2023,2
+Sarawak,2,15.0,June,2023,June 2023,6
+Sarawak,3,15.0,August,2023,August 2023,8
+Sarawak,4,15.0,October,2023,October 2023,10
+Sarawak,5,15.0,February,2022,February 2022,2
+Selangor,1,16.0,September,2021,September 2021,9
+Selangor,2,16.0,October,2021,October 2021,10
+Selangor,3,15.0,February,2024,February 2024,2
+Selangor,4,15.0,March,2024,March 2024,3
+Selangor,5,15.0,April,2024,April 2024,4
+Terengganu,1,16.0,March,2022,March 2022,3
+Terengganu,2,15.0,February,2022,February 2022,2
+Terengganu,3,15.0,October,2020,October 2020,10
+Terengganu,4,14.0,March,2024,March 2024,3
+Terengganu,5,14.0,April,2024,April 2024,4

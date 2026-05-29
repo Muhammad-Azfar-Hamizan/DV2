@@ -1,0 +1,12 @@
+year,avg_national_rainfall,max_state,max_state_rainfall,flood_event,flood_note
+2014,2712.1,Kuala Lumpur,3380.8,True,East Coast Floods
+2015,2340.5,Sarawak,3466.6,False,
+2016,2303.5,Sarawak,3405.4,False,
+2017,2855.6,Sarawak,3739.1,False,
+2018,2586.1,Sarawak,3470.7,False,
+2019,2155.7,Sarawak,3112.0,False,
+2020,2656.1,Sarawak,4001.7,False,
+2021,2658.2,Sarawak,3692.1,True,Klang Valley Floods
+2022,2842.7,Sarawak,4130.7,False,
+2023,2934.6,Terengganu,3991.4,True,Johor Floods
+2024,3106.5,Sarawak,4039.8,False,

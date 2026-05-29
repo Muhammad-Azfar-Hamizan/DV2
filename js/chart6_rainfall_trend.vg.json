@@ -1,0 +1,145 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 640,
+  "height": 300,
+  "data": { "url": "data/rainfall_trend.csv" },
+  "layer": [
+
+    {
+      "description": "LAYER 1 — Shaded area anchored to domain floor",
+      "transform": [{ "calculate": "2000", "as": "area_baseline" }],
+      "mark": { "type": "area", "line": false, "opacity": 0.18, "color": "#2e7eab" },
+      "encoding": {
+        "x": {
+          "field": "year", "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": 0, "labelColor": "#555555", "titleColor": "#1a1a1a",
+            "labelFontSize": 10, "titleFontSize": 11, "grid": false, "domainColor": "#cccccc"
+          }
+        },
+        "y": {
+          "field": "avg_national_rainfall", "type": "quantitative",
+          "scale": { "domain": [2000, 3500], "zero": false },
+          "axis": {
+            "labelColor": "#555555", "titleColor": "#1a1a1a",
+            "labelFontSize": 10, "titleFontSize": 11,
+            "gridColor": "#e8e8e8", "domainColor": "#cccccc",
+            "format": ",.0f",
+            "title": "Average Annual Rainfall (mm)"
+          }
+        },
+        "y2": { "field": "area_baseline", "type": "quantitative" }
+      }
+    },
+
+    {
+      "description": "LAYER 2 — Main national average line",
+      "mark": { "type": "line", "strokeWidth": 2.5, "color": "#2e7eab", "point": false },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "avg_national_rainfall", "type": "quantitative", "scale": { "domain": [2000, 3500], "zero": false } }
+      }
+    },
+
+    {
+      "description": "LAYER 3 — Blue dots on non-flood years",
+      "transform": [{ "filter": "datum.flood_event == 'False'" }],
+      "mark": { "type": "circle", "size": 55, "color": "#2e7eab", "opacity": 1 },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "avg_national_rainfall", "type": "quantitative", "scale": { "domain": [2000, 3500], "zero": false } },
+        "tooltip": [
+          { "field": "year",                 "type": "ordinal",      "title": "Year" },
+          { "field": "avg_national_rainfall", "type": "quantitative", "title": "National Average Rainfall (mm)", "format": ",.0f" },
+          { "field": "max_state",             "type": "nominal",      "title": "Wettest State" },
+          { "field": "max_state_rainfall",    "type": "quantitative", "title": "Wettest State Rainfall (mm)",   "format": ",.0f" }
+        ]
+      }
+    },
+
+    {
+      "description": "LAYER 4 — Orange dots on flood years",
+      "transform": [{ "filter": "datum.flood_event == 'True'" }],
+      "mark": { "type": "circle", "size": 90, "color": "#e07231", "opacity": 1, "stroke": "#b85000", "strokeWidth": 1.4 },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "avg_national_rainfall", "type": "quantitative", "scale": { "domain": [2000, 3500], "zero": false } },
+        "tooltip": [
+          { "field": "year",                 "type": "ordinal",      "title": "Year" },
+          { "field": "flood_note",            "type": "nominal",      "title": "⚠ Flood Event" },
+          { "field": "avg_national_rainfall", "type": "quantitative", "title": "National Average Rainfall (mm)", "format": ",.0f" },
+          { "field": "max_state",             "type": "nominal",      "title": "Wettest State" },
+          { "field": "max_state_rainfall",    "type": "quantitative", "title": "Wettest State Rainfall (mm)",   "format": ",.0f" }
+        ]
+      }
+    },
+
+    {
+      "description": "LAYER 5a — Diagonal connector for 2014",
+      "data": {
+        "values": [
+          { "cx": "2015", "cy": 3320 },
+          { "cx": "2014", "cy": 2712.1 }
+        ]
+      },
+      "mark": { "type": "line", "strokeWidth": 1, "strokeDash": [3, 2], "color": "#b85000", "opacity": 0.55 },
+      "encoding": {
+        "x": { "field": "cx", "type": "ordinal" },
+        "y": { "field": "cy", "type": "quantitative", "scale": { "domain": [2000, 3500], "zero": false } }
+      }
+    },
+
+    {
+      "description": "LAYER 5b — Vertical connectors for 2021 and 2023",
+      "transform": [
+        { "filter": "datum.flood_event == 'True' && datum.year != '2014'" },
+        { "calculate": "3320", "as": "label_anchor_y" }
+      ],
+      "mark": { "type": "rule", "strokeWidth": 1, "strokeDash": [3, 2], "color": "#b85000", "opacity": 0.55 },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "avg_national_rainfall", "type": "quantitative", "scale": { "domain": [2000, 3500], "zero": false } },
+        "y2": { "field": "label_anchor_y", "type": "quantitative" }
+      }
+    },
+
+    {
+      "description": "LAYER 6 — Text label for 2014",
+      "data": {
+        "values": [
+          { "cx": "2015", "cy": 3330, "label": "East Coast Floods" }
+        ]
+      },
+      "mark": { "type": "text", "align": "center", "baseline": "bottom", "fontSize": 8.5, "fontStyle": "italic", "fontWeight": "bold", "color": "#b85000" },
+      "encoding": {
+        "x": { "field": "cx", "type": "ordinal" },
+        "y": { "field": "cy", "type": "quantitative", "scale": { "domain": [2000, 3500], "zero": false } },
+        "text": { "field": "label", "type": "nominal" }
+      }
+    },
+
+    {
+      "description": "LAYER 7 — Text labels for 2021 and 2023",
+      "transform": [
+        { "filter": "datum.flood_event == 'True' && datum.year != '2014'" },
+        { "calculate": "3330", "as": "label_y" }
+      ],
+      "mark": { "type": "text", "align": "center", "baseline": "bottom", "fontSize": 8.5, "fontStyle": "italic", "fontWeight": "bold", "color": "#b85000" },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "label_y", "type": "quantitative", "scale": { "domain": [2000, 3500], "zero": false } },
+        "text": { "field": "flood_note", "type": "nominal" }
+      }
+    }
+
+  ],
+  "resolve": { "scale": { "y": "shared" } },
+  "config": {
+    "background": "transparent",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#555555", "titleColor": "#1a1a1a", "gridColor": "#e0e0e0", "domainColor": "#cccccc" },
+    "legend": { "labelColor": "#555555", "titleColor": "#1a1a1a" },
+    "title": { "color": "#1a1a1a", "subtitleColor": "#555555" }
+  }
+}

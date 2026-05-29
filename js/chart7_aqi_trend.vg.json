@@ -1,0 +1,635 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 640,
+  "height": 340,
+  "data": {
+    "url": "data/aqi_annual.csv"
+  },
+  "resolve": {
+    "scale": {
+      "y": "shared"
+    }
+  },
+  "layer": [
+    {
+      "description": "LAYER 1 \u2014 Shaded area under line",
+      "mark": {
+        "type": "area",
+        "opacity": 0.15,
+        "color": "#963068"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": -30,
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "labelFontSize": 10,
+            "titleFontSize": 11,
+            "grid": false,
+            "domainColor": "#cccccc"
+          }
+        },
+        "y": {
+          "field": "unhealthy_days",
+          "type": "quantitative",
+          "title": "Days with Air Pollutant Index above 100",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          },
+          "axis": {
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "gridColor": "#e0e0e0",
+            "domainColor": "#cccccc",
+            "labelFontSize": 10,
+            "titleFontSize": 11
+          }
+        }
+      }
+    },
+    {
+      "description": "LAYER 2 \u2014 Main trend line with points",
+      "mark": {
+        "type": "line",
+        "point": false,
+        "strokeWidth": 2.2,
+        "color": "#963068"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "unhealthy_days",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "unhealthy_days",
+            "type": "quantitative",
+            "title": "Unhealthy Air Days"
+          },
+          {
+            "field": "worst_event",
+            "type": "nominal",
+            "title": "Haze Event"
+          }
+        ]
+      }
+    },
+    {
+      "comment": "LAYER 1b \u2014 Blue points for all years",
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 60,
+        "color": "#963068"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "unhealthy_days",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "unhealthy_days",
+            "type": "quantitative",
+            "title": "Unhealthy Air Days"
+          },
+          {
+            "field": "worst_event",
+            "type": "nominal",
+            "title": "Haze Event"
+          }
+        ]
+      }
+    },
+    {
+      "comment": "LAYER 1c \u2014 Orange highlighted points for annotated haze years",
+      "transform": [
+        {
+          "filter": "datum.annotate == 'True'"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 80,
+        "color": "#e07231",
+        "stroke": "#b85000",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "unhealthy_days",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "LAYER 3a \u2014 Connector for 2006 up to y=165 (Sumatra fires)",
+      "data": {
+        "values": [
+          {
+            "yr": "2006",
+            "y1": 65,
+            "y2": 165
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1,
+        "strokeDash": [
+          3,
+          2
+        ],
+        "color": "#b85000",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y1",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "y2": {
+          "field": "y2",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "LAYER 3b \u2014 Label for 2006 at y=165",
+      "data": {
+        "values": [
+          {
+            "yr": "2006",
+            "yv": 165,
+            "label": "Sumatra fires"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "baseline": "bottom",
+        "align": "center",
+        "fontSize": 8.5,
+        "fontStyle": "italic",
+        "fontWeight": "bold",
+        "color": "#b85000"
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "yv",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "description": "LAYER 4a \u2014 Connector for 2009 up to y=155",
+      "data": {
+        "values": [
+          {
+            "yr": "2009",
+            "y1": 49,
+            "y2": 155
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1,
+        "strokeDash": [
+          3,
+          2
+        ],
+        "color": "#b85000",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y1",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "y2": {
+          "field": "y2",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "LAYER 4b \u2014 Label for 2009 at y=155",
+      "data": {
+        "values": [
+          {
+            "yr": "2009",
+            "yv": 155,
+            "label": "Sumatra fires"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "baseline": "bottom",
+        "align": "center",
+        "fontSize": 8.5,
+        "fontStyle": "italic",
+        "fontWeight": "bold",
+        "color": "#b85000"
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "yv",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "description": "LAYER 5a \u2014 Connector for 2014 up to y=165",
+      "data": {
+        "values": [
+          {
+            "yr": "2014",
+            "y1": 119,
+            "y2": 165
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1,
+        "strokeDash": [
+          3,
+          2
+        ],
+        "color": "#b85000",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y1",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "y2": {
+          "field": "y2",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "LAYER 5b \u2014 Label for 2014 at y=165",
+      "data": {
+        "values": [
+          {
+            "yr": "2014",
+            "yv": 165,
+            "label": "Riau fires"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "baseline": "bottom",
+        "align": "center",
+        "fontSize": 8.5,
+        "fontStyle": "italic",
+        "fontWeight": "bold",
+        "color": "#b85000"
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "yv",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "description": "LAYER 6a \u2014 Connector for 2015 up to y=152",
+      "data": {
+        "values": [
+          {
+            "yr": "2015",
+            "y1": 103,
+            "y2": 152
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1,
+        "strokeDash": [
+          3,
+          2
+        ],
+        "color": "#b85000",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y1",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "y2": {
+          "field": "y2",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "LAYER 6b \u2014 Label for 2015 at y=152",
+      "data": {
+        "values": [
+          {
+            "yr": "2015",
+            "yv": 152,
+            "label": "Indonesia peat fires"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "baseline": "bottom",
+        "align": "center",
+        "fontSize": 8.5,
+        "fontStyle": "italic",
+        "fontWeight": "bold",
+        "color": "#b85000"
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "yv",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "description": "LAYER 7a \u2014 Connector for 2019 up to y=140",
+      "data": {
+        "values": [
+          {
+            "yr": "2019",
+            "y1": 90,
+            "y2": 140
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1,
+        "strokeDash": [
+          3,
+          2
+        ],
+        "color": "#b85000",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "y1",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "y2": {
+          "field": "y2",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "LAYER 7b \u2014 Label for 2019 at y=140",
+      "data": {
+        "values": [
+          {
+            "yr": "2019",
+            "yv": 140,
+            "label": "Kalimantan fires"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "baseline": "bottom",
+        "align": "center",
+        "fontSize": 8.5,
+        "fontStyle": "italic",
+        "fontWeight": "bold",
+        "color": "#b85000"
+      },
+      "encoding": {
+        "x": {
+          "field": "yr",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "yv",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              175
+            ]
+          }
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "description": "LAYER 8 \u2014 100-day threshold dashed rule",
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          5,
+          4
+        ],
+        "color": "#555555",
+        "opacity": 0.45,
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "y": {
+          "datum": 100,
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "description": "LAYER 9 \u2014 100-day label pinned to right edge",
+      "data": {
+        "values": [
+          {}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "x": 635,
+        "align": "right",
+        "dy": -6,
+        "fontSize": 8.5,
+        "color": "#555555",
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "y": {
+          "datum": 100
+        },
+        "text": {
+          "value": "100-day threshold"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a",
+      "gridColor": "#e0e0e0",
+      "domainColor": "#cccccc"
+    },
+    "legend": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a"
+    },
+    "title": {
+      "color": "#1a1a1a",
+      "subtitleColor": "#555555"
+    }
+  }
+}

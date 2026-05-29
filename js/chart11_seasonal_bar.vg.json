@@ -1,0 +1,51 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 640,
+  "height": 210,
+  "data": { "url": "data/monthly_precipitation_tidy_long.csv" },
+  "transform": [
+    { "filter": "datum.year == 2024" }
+  ],
+  "mark": { "type": "bar", "color": "#2e7eab", "tooltip": true },
+  "encoding": {
+    "x": {
+      "field": "month_name",
+      "type": "ordinal",
+      "sort": ["January","February","March","April","May","June","July","August","September","October","November","December"],
+      "title": "Month",
+      "axis": {
+        "labelAngle": -30,
+        "labelColor": "#555555", "titleColor": "#1a1a1a",
+        "domainColor": "#cccccc",
+        "labelFontSize": 10, "titleFontSize": 11,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "precipitation",
+      "type": "quantitative",
+      "aggregate": "mean",
+      "title": "Average Precipitation (mm)",
+      "axis": {
+        "grid": true, "gridColor": "#e0e0e0",
+        "labelColor": "#555555", "titleColor": "#1a1a1a",
+        "domainColor": "#cccccc",
+        "labelFontSize": 10, "titleFontSize": 11
+      }
+    },
+    "tooltip": [
+      { "field": "month_name", "type": "ordinal", "title": "Month" },
+      { "field": "precipitation", "type": "quantitative", "aggregate": "mean", "title": "Average Precipitation (mm)", "format": ".1f" }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#555555", "titleColor": "#1a1a1a",
+      "gridColor": "#e0e0e0", "domainColor": "#cccccc"
+    },
+    "legend": { "labelColor": "#555555", "titleColor": "#1a1a1a" },
+    "title": { "color": "#1a1a1a", "subtitleColor": "#555555" }
+  }
+}

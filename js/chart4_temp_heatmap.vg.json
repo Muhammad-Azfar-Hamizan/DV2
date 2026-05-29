@@ -1,0 +1,166 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 4 \u2014 Monthly absolute peak temperature heatmap for Malaysia (2014-2024)",
+  "width": 505,
+  "height": 260,
+  "data": {
+    "url": "data/monthly_temperature.csv"
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "stroke": "#fde8d4",
+        "strokeWidth": 1.5,
+        "cornerRadius": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": {
+            "labelAngle": 0,
+            "labelFontSize": 11,
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "grid": false
+          },
+          "sort": null
+        },
+        "y": {
+          "field": "month",
+          "type": "ordinal",
+          "title": "Month",
+          "axis": {
+            "labelExpr": "['','January','February','March','April','May','June','July','August','September','October','November','December'][datum.value]",
+            "labelFontSize": 10,
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "grid": false
+          },
+          "sort": {
+            "order": "ascending"
+          },
+          "scale": {
+            "reverse": true
+          }
+        },
+        "color": {
+          "field": "peak_bin",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              "< 33\u00b0C",
+              "33\u201335\u00b0C",
+              "35\u201337\u00b0C",
+              "37\u201339\u00b0C",
+              "\u2265 39\u00b0C"
+            ],
+            "range": [
+              "#fdd49e",
+              "#fdbb84",
+              "#fc8d59",
+              "#e34a33",
+              "#b30000"
+            ]
+          },
+          "legend": {
+            "title": "Peak Temperature (\u00b0C)",
+            "orient": "right",
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "titleFontSize": 10,
+            "labelFontSize": 10,
+            "titlePadding": 6,
+            "offset": 8,
+            "symbolType": "square",
+            "symbolSize": 150
+          }
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "month_name",
+            "type": "nominal",
+            "title": "Month"
+          },
+          {
+            "field": "abs_peak_temp_c",
+            "type": "quantitative",
+            "title": "Average Peak Temperature (\u00b0C)",
+            "format": ".1f"
+          }
+        ]
+      },
+      "transform": [
+        {
+          "calculate": "datum.abs_peak_temp_c < 33 ? '< 33\u00b0C' : datum.abs_peak_temp_c < 35 ? '33\u201335\u00b0C' : datum.abs_peak_temp_c < 37 ? '35\u201337\u00b0C' : datum.abs_peak_temp_c < 39 ? '37\u201339\u00b0C' : '\u2265 39\u00b0C'",
+          "as": "peak_bin"
+        }
+      ]
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 7.5,
+        "fontWeight": "normal",
+        "baseline": "middle",
+        "align": "center"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "sort": null
+        },
+        "y": {
+          "field": "month",
+          "type": "ordinal",
+          "sort": {
+            "order": "ascending"
+          },
+          "scale": {
+            "reverse": true
+          }
+        },
+        "text": {
+          "field": "abs_peak_temp_c",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "color": {
+          "condition": {
+            "test": "datum.peak_bin == '\u2265 39\u00b0C' || datum.peak_bin == '37\u201339\u00b0C'",
+            "value": "#ffffff"
+          },
+          "value": "#4a1500"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a",
+      "gridColor": "#e0e0e0",
+      "domainColor": "#cccccc"
+    },
+    "legend": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a"
+    },
+    "title": {
+      "color": "#1a1a1a",
+      "subtitleColor": "#555555"
+    }
+  }
+}

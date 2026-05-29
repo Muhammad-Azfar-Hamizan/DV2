@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malaysia's High Risk Weather</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+  <style>
+    :root {
+      --bg-page:        #f2f2f0;
+      --bg-header:      #f2f2f0;
+
+      --accent-s1:      #e8e0f5;
+      --accent-s2:      #fde8d4;
+      --accent-s3:      #d6eaf5;
+      --accent-s4:      #f5d9e8;
+      --accent-s5:      #fdf3cc;
+
+      --accent-s1-dark: #5b3d9e;
+      --accent-s2-dark: #b85c1a;
+      --accent-s3-dark: #2e7eab;
+      --accent-s4-dark: #963068;
+      --accent-s5-dark: #a07c00;
+
+      --text-primary:   #1a1a1a;
+      --text-secondary: #444444;
+      --text-caption:   #777777;
+
+      --fs-section:     1.25rem;
+      --fs-chart-title: 1rem;
+      --fs-body:        0.88rem;
+      --fs-caption:     0.75rem;
+
+      --font: 'Outfit', sans-serif;
+      --page-max: 1180px;
+      --gap: 1.5rem;
+      --radius: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg-page);
+      color: var(--text-primary);
+      font-size: var(--fs-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HEADER */
+    .dv-header {
+      background: var(--bg-header);
+      border-bottom: 2px solid rgba(0,0,0,0.10);
+      padding: 2.6rem 2rem 2.2rem;
+      text-align: center;
+    }
+    .dv-header h1 {
+      font-family: 'Times New Roman', Times, Georgia, serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.15;
+      color: #000000;
+      letter-spacing: 0.01em;
+    }
+    .dv-header .header-subtitle {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: #555555;
+      font-style: italic;
+    }
+    .dv-header .header-intro {
+      max-width: 743px;
+      margin: 1rem auto 0;
+      font-size: 1.15rem;
+      color: #333333;
+      line-height: 1.75;
+      text-align: center;
+    }
+    .dv-header .header-intro p + p { margin-top: 0.85rem; }
+
+    /* STAT CARDS */
+    .stat-row {
+      display: grid;
+      grid-template-columns: 3.5fr 3.5fr 3fr;
+      gap: 1.2rem;
+    }
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.3rem;
+      text-align: center;
+    }
+    .stat-card .stat-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--section-accent-dark, #5b3d9e);
+    }
+    .stat-card .stat-label {
+      margin-top: 0.3rem;
+      font-size: var(--fs-caption);
+      font-weight: 400;
+      color: #555555;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat-card .stat-note {
+      margin-top: 0.2rem;
+      font-size: 0.7rem;
+      color: #888888;
+    }
+
+    /* PAGE WRAPPER */
+    .page-wrap {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* SECTION BLOCK */
+    .dv-section {
+      background: var(--section-accent, #d6eaf5);
+      border-radius: var(--radius);
+      margin: 1.6rem 0;
+      overflow: hidden;
+    }
+    .section-header {
+      background: var(--section-accent-dark, #2e7eab);
+      padding: 0.9rem 1.4rem;
+      display: flex;
+      align-items: baseline;
+      gap: 0.85rem;
+    }
+    .section-header .section-num {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      white-space: nowrap;
+    }
+    .section-header h2 {
+      font-size: var(--fs-section);
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .section-header h2 .accent { color: rgba(255,255,255,0.90); }
+
+    /* SECTION NARRATIVE — white context card */
+    .section-narrative {
+      margin: 1rem 1.4rem 0;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-radius: var(--radius);
+      padding: 1rem 1.3rem;
+      font-size: 1.15rem;
+      color: #333333;
+      line-height: 1.7;
+      max-width: 743px;
+    }
+    .section-narrative p + p { margin-top: 0.75rem; }
+
+    /* SECTION SUMMARY — white conclusion card at bottom of each section */
+    .section-summary {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.09);
+      border-top: 3px solid var(--section-accent-dark, #2e7eab);
+      border-radius: var(--radius);
+      padding: 1rem 1.3rem;
+      max-width: 743px;
+    }
+    .section-summary .summary-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--section-accent-dark, #2e7eab);
+      margin-bottom: 0.4rem;
+    }
+    .section-summary p {
+      font-size: 1.15rem;
+      color: #333333;
+      line-height: 1.7;
+    }
+    .section-summary p + p { margin-top: 0.75rem; }
+
+    /* SECTION BODY stacks chart-layers vertically */
+    .section-body {
+      padding: var(--gap) 1.6rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    /* CHART LAYER: 70% chart, 30% annotation */
+    .chart-layer {
+      display: grid;
+      grid-template-columns: 7fr 3fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    /* CHART CARD */
+    .chart-card {
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.10);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .chart-card-header {
+      padding: 0.85rem 1.1rem 0.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .chart-card-header::after {
+      content: '';
+      display: block;
+      height: 2px;
+      width: 36px;
+      background: var(--section-accent-dark, #2e7eab);
+      border-radius: 2px;
+      margin-top: 0.5rem;
+    }
+    .chart-card-header .chart-title {
+      font-size: var(--fs-chart-title);
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.3;
+    }
+    .chart-card-header .chart-subtitle {
+      margin-top: 0.2rem;
+      font-size: 0.78rem;
+      font-style: italic;
+      color: #555555;
+      line-height: 1.4;
+    }
+    .vega-embed { width: 100% !important; }
+    .vega-container {
+      padding: 1.2rem 1.2rem 0.8rem;
+      width: 100%;
+      min-height: 300px;
+    }
+    .vega-container .vega-embed canvas,
+    .vega-container .vega-embed svg {
+      width: 100% !important;
+      height: auto !important;
+    }
+    .chart-source {
+      padding: 0.35rem 1.1rem 0.6rem;
+      font-size: 0.65rem;
+      color: #888888;
+    }
+
+    /* ANNOTATION COLUMN */
+    .annotation-col {
+      display: flex;
+      flex-direction: column;
+      align-self: stretch;
+    }
+    .annotation-box {
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(0,0,0,0.09);
+      border-left: 4px solid var(--section-accent-dark, #2e7eab);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.1rem;
+      font-size: 0.82rem;
+      color: #444444;
+      line-height: 1.65;
+      flex: 1;
+    }
+    .annotation-box strong {
+      display: block;
+      color: #1a1a1a;
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+    }
+
+    /* SECTION ACCENT OVERRIDES */
+    .s1 { --section-accent: var(--accent-s1); --section-accent-dark: var(--accent-s1-dark); }
+    .s2 { --section-accent: var(--accent-s2); --section-accent-dark: var(--accent-s2-dark); }
+    .s3 { --section-accent: var(--accent-s3); --section-accent-dark: var(--accent-s3-dark); }
+    .s4 { --section-accent: var(--accent-s4); --section-accent-dark: var(--accent-s4-dark); }
+    .s5 { --section-accent: var(--accent-s5); --section-accent-dark: var(--accent-s5-dark); }
+
+    /* FOOTER */
+    .dv-footer {
+      background: #e8e8e5;
+      border-top: 1px solid rgba(0,0,0,0.12);
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+    }
+    .footer-inner {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      font-size: var(--fs-caption);
+      color: #555555;
+    }
+    .footer-block h4 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #333333;
+      margin-bottom: 0.45rem;
+    }
+    .footer-block a { color: var(--accent-s1-dark); text-decoration: none; }
+    .footer-block a:hover { text-decoration: underline; }
+    .footer-block p { margin-bottom: 0.25rem; }
+
+    /* RESPONSIVE */
+    @media (max-width: 760px) {
+      .chart-layer { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .dv-header h1 { font-size: 2rem; }
+      .annotation-box { border-radius: var(--radius); }
+    }
+
+    .vega-bind-radio label { margin-left: 8px; margin-right: 12px; }
+    .vega-bind-select label { font-size: 0.82rem; color: #555555; font-weight: 500; margin-right: 6px; }
+    .vega-bind-select select {
+      font-size: 0.82rem;
+      font-family: var(--font);
+      color: #1a1a1a;
+      background: #fdf3cc;
+      border: 1px solid #d4b800;
+      border-radius: 5px;
+      padding: 3px 8px;
+      cursor: pointer;
+      outline: none;
+    }
+    .vega-bind-select select:focus { border-color: #a07c00; box-shadow: 0 0 0 2px rgba(160,124,0,0.15); }
+  </style>
+</head>
+<body>
+
+<header class="dv-header">
+  <h1>Malaysia's High Risk Weather</h1>
+  <p class="header-subtitle">Exploring the heat, rain, haze, and UV that shape everyday life across all 16 states · 2005–2024</p>
+  <div class="header-intro">
+    <p>Step outside in Malaysia on any given day and you already know what the data is about to tell you. It is hot. It is humid. And if the clouds are gathering, it is about to rain.</p>
+    <p>Malaysia does not have four seasons. What it has is heat, rain, haze, and a sun that never takes a day off. Sitting just north of the Equator, Malaysia's climate has always been intense. But intense is no longer the right word. The heat is climbing. The rainfall is rising. And the risks behind both are not standing still.</p>
+    <p>This visualisation maps four dimensions of Malaysia's climate risk across a decade of real data. The weather here is not background noise. It is a risk. And it is one every Malaysian lives with every single day.</p>
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- SECTION 1 — Overview -->
+  <section class="dv-section s1">
+    <div class="section-header">
+      <span class="section-num">Section 01</span>
+      <h2>Overview: <span class="accent">Malaysia at a Glance (2024)</span></h2>
+    </div>
+    <div class="section-narrative">
+      <p>Temperatures above 27°C year-round. Annual rainfall above 3,000 mm. Air quality already 3.7× above the WHO safe limit — on a normal year. A Malaysian stepping outside at noon in July is already navigating conditions most of the world would call extreme. This section establishes what normal looks like here. In Malaysia, normal is already demanding.</p>
+    </div>
+
+    <div class="section-body">
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-value">27.1°C</div>
+          <div class="stat-label">Average Temperature Across All States</div>
+          <div class="stat-note">2024 annual mean · World Bank CCKP</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">3,106 mm</div>
+          <div class="stat-label">Average Annual Rainfall</div>
+          <div class="stat-note">2024 total mean across states · World Bank CCKP</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">18.32 µg/m³</div>
+          <div class="stat-label">Average PM2.5 Concentration (2024)</div>
+          <div class="stat-note">3.7× above WHO guideline of 5 µg/m³ · IQAir Malaysia 2024</div>
+        </div>
+      </div>
+
+      <!-- Chart 1 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Average Temperature by State (2024)</div>
+            <div class="chart-subtitle">Choropleth map · average annual temperature (°C) per state · hover to explore</div>
+          </div>
+          <div id="chart1" class="vega-container"></div>
+          <div class="chart-source">Source: World Bank Climate Knowledge Portal (CCKP)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>Pulau Pinang is Malaysia's hottest state — 28.4°C</strong>
+            Sarawak is the coolest at 26.1°C. A 2.3°C spread from coast to Borneo. Even the coolest Malaysian state is warmer than most of the world.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 2 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Average Monthly Rainfall by State (2024)</div>
+            <div class="chart-subtitle">Choropleth map · average monthly rainfall (mm) per state · hover to explore</div>
+          </div>
+          <div id="chart2" class="vega-container"></div>
+          <div class="chart-source">Source: World Bank Climate Knowledge Portal (CCKP)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>Sarawak and Kuala Lumpur average over 320 mm of rain per month</strong>
+            Labuan and Perlis sit below 210 mm — the driest in the country. Two monsoon tracks. One country. Vastly different weather depending on where you stand.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 11 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Seasonal Cycle: Monthly Rainfall Jan–Dec (2024)</div>
+            <div class="chart-subtitle">Bar chart · average monthly precipitation (mm) across all Malaysian states · 2024 · World Bank CCKP</div>
+          </div>
+          <div id="chart11" class="vega-container"></div>
+          <div class="chart-source">Source: World Bank Climate Knowledge Portal (CCKP)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>November peaks at 460 mm — nearly five times the July low of 99 mm</strong>
+            The Northeast Monsoon arrives every year between November and January. The rhythm is consistent. What is changing is the intensity.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1 Summary -->
+      <div class="section-summary">
+        <div class="summary-label">Section Summary</div>
+        <p>Temperatures above 27°C. Rainfall above 3,000 mm. Two monsoon seasons shaping the rhythm of everyday life. These are not extreme figures. They are the norm. The sections that follow show what happens when that norm gets pushed — and pushed it has been.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SECTION 2 — Rising Heat -->
+  <section class="dv-section s2">
+    <div class="section-header">
+      <span class="section-num">Section 02</span>
+      <h2>Rising Heat: <span class="accent">Temperature Trends 2014–2024</span></h2>
+    </div>
+    <div class="section-narrative">
+      <p>Picture March in Malaysia. Late afternoon. No cloud cover. The temperature reads 38°C. For the construction worker, the delivery rider, the farmer — this is not an unusual afternoon. It is just another working day.</p>
+      <p>Malaysia's heat has always been intense. But the past decade shows something beyond intensity. It shows a trend. The national average peak temperature has risen 2.8°C in ten years. And 2024 — the hottest year on record — got there without a single El Niño event to blame. The warming is no longer cyclical. It is structural.</p>
+    </div>
+
+    <div class="section-body">
+
+      <!-- Chart 3 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Annual Absolute Peak Temperature Trend (2014–2024)</div>
+            <div class="chart-subtitle">Line chart · average peak temperature across all states (°C) · hottest state recorded shown as dashed line</div>
+          </div>
+          <div id="chart3" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>34.3°C in 2014. 37.1°C in 2024. A rise of 2.8°C in ten years.</strong>
+            The IPCC has warned that even a 1–2°C rise in average temperatures significantly increases the risk of heatstroke and cardiovascular collapse — particularly for outdoor workers and the elderly. Malaysia has already crossed that threshold in its hottest states. And 2024 broke the record without El Niño. The trend line shows no plateau.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 4 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Monthly Absolute Peak Temperature Heatmap (2014–2024)</div>
+            <div class="chart-subtitle">Heatmap · month × year grid · colour encodes average absolute peak temperature (°C) across all states</div>
+          </div>
+          <div id="chart4" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>2017 was the warning. The decade since has not cooled down.</strong>
+            In 2017, temperatures spiked across nearly every month — peaks of 38–40°C that looked like outliers. They were not outliers. They were a preview. From 2019 onwards, March, April, and May progressively darken toward that same saturated red. May sits at 36.5°C average. April at 36.4°C. March at 36.3°C. The entire grid is shifting warmer. The right side of the heatmap tells you where it is going.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 Summary -->
+      <div class="section-summary">
+        <div class="summary-label">Section Summary</div>
+        <p>+2.8°C in ten years. Faster than the global average. No sign of reversing. What was a record in 2017 is the norm by 2024. But heat is only the first risk. The second arrives every monsoon season — and it is getting heavier.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SECTION 3 — Rainfall & Flood Risk -->
+  <section class="dv-section s3">
+    <div class="section-header">
+      <span class="section-num">Section 03</span>
+      <h2>Rainfall &amp; Flood Risk: <span class="accent">When the Monsoon Overwhelms</span></h2>
+    </div>
+    <div class="section-narrative">
+      <p>December 2014. The rivers across Kelantan, Terengganu, and Pahang rose faster than anyone could evacuate. Over 500,000 people displaced. The worst flooding in decades.</p>
+      <p>December 2021. Shah Alam. Kuala Lumpur. Highways submerged. Neighbourhoods that had never flooded before — flooded.</p>
+      <p>2023. Johor. 40,000 evacuated.</p>
+      <p>Three floods. Ten years. Three times described as exceptional. The data says otherwise.</p>
+    </div>
+
+    <div class="section-body">
+
+      <!-- Chart 5 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Average Annual Rainfall by State (2014–2024)</div>
+            <div class="chart-subtitle">Choropleth map · 11-year average annual rainfall per state (mm) · hover a state to explore</div>
+          </div>
+          <div id="chart5" class="vega-container"></div>
+          <div class="chart-source">Source: World Bank Climate Knowledge Portal (CCKP)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>Sarawak averages 3,609 mm of rainfall per year — the highest of any state</strong>
+            Perlis records the least at 2,098 mm. On the Peninsula, Terengganu (3,218 mm) and Kuala Lumpur (3,052 mm) are the wettest. For these states, high rainfall is not exceptional. It is the baseline. The question is what happens when that baseline keeps rising.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 6 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Malaysia's Wettening Decade (2014–2024)</div>
+            <div class="chart-subtitle">Line + area · national average annual rainfall across 15 states · orange points = major flood events · ERA5 CCKP data</div>
+          </div>
+          <div id="chart6" class="vega-container"></div>
+          <div class="chart-source">Source: World Bank Climate Knowledge Portal (CCKP) — ERA5 Precipitation Data</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>2,304 mm in 2016. 3,107 mm in 2024. A 35% rise in under a decade.</strong>
+            Three orange points. Three disasters. The 2014 East Coast Floods — 500,000 displaced, RM2.8 billion in damage. The 2021 Klang Valley Floods — 70,000 displaced, RM6 billion. The 2023 Johor Floods — 40,000 evacuated, RM1.5 billion. As the baseline rises, ordinary monsoon seasons tip into catastrophe.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3 Summary -->
+      <div class="section-summary">
+        <div class="summary-label">Section Summary</div>
+        <p>35% more rainfall in under a decade. Three major floods. Three records broken. The monsoon has always been heavy. What has changed is how heavy — and how often that weight becomes a disaster. Rising rainfall is only one part of what makes Malaysia's weather dangerous. The next risk arrives not from the sky above — but from across the border.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SECTION 4 — Air Quality & Haze -->
+  <section class="dv-section s4">
+    <div class="section-header">
+      <span class="section-num">Section 04</span>
+      <h2>Air Quality &amp; Haze: <span class="accent">The Crisis We Did Not Start</span></h2>
+    </div>
+    <div class="section-narrative">
+      <p>September 2019. The sky over Kuala Lumpur turned a dull, acrid orange. Schools closed. The Air Pollutant Index crossed 100. The cause was not anything happening in Malaysia. It was peatland fires burning in Kalimantan, Indonesia — hundreds of kilometres away. The smoke drifted north. And Malaysia breathed it for weeks.</p>
+      <p>This is Malaysia's most unpredictable weather hazard. Most years the air is manageable. But when Indonesia's dry season meets an El Niño year and the fires start, Malaysia has no ability to stop what is coming. We did not start the fires. But we breathe the smoke.</p>
+    </div>
+
+    <div class="section-body">
+
+      <!-- Chart 7 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Annual Unhealthy Air Days (Air Pollutant Index above 100)</div>
+            <div class="chart-subtitle">Line chart · count of days per year where Air Pollutant Index exceeded 100 · worst haze years annotated · 2005–2022</div>
+          </div>
+          <div id="chart7" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Air Pollution Index</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>In 2014, Malaysia recorded 119 days of unhealthy air — one in three days of the year</strong>
+            The Riau fires drove Malaysia's Air Pollutant Index above 100 for a third of the year — the worst on record. The 2015 Indonesia peat fires followed at 103 days. The 2019 Kalimantan fires spiked to 90. Between peaks, Malaysia averages 20–50 unhealthy days per year. Not a crisis — but not clean air. And the next fire season is always one dry El Niño year away.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 8 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Monthly PM₂.₅ Concentration (2018–2022)</div>
+            <div class="chart-subtitle">Bar chart · monthly average PM₂.₅ (µg/m³) · colour = WHO risk level · dashed line = Department of Environment guideline 15 µg/m³ · data.gov.my</div>
+          </div>
+          <div id="chart8" class="vega-container"></div>
+          <div class="chart-source">Source: data.gov.my — Department of Environment Malaysia</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>September 2019: 52.9 µg/m³ — more than 3× the chart's 15 µg/m³ guideline threshold</strong>
+            The Kalimantan peat fires pushed Malaysia's monthly PM₂.₅ to its worst recorded level of the modern data era. Most months Malaysia sits between 10–20 µg/m³ — manageable, not ideal. The 2020 MCO lockdown briefly cut that to 11 µg/m³ — showing what cleaner Malaysian air could look like. It should not take a pandemic to get there.
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4 Summary -->
+      <div class="section-summary">
+        <div class="summary-label">Section Summary</div>
+        <p>Malaysia does not start the fires. But Malaysia breathes the smoke. Of the four weather risks in this visualisation, haze is the one we have the least power to control. Every dry El Niño year carries the risk of another 2014. That vulnerability — to something entirely beyond our control — is a risk all its own. But Malaysia's high risk weather is not done yet. There is one more hazard. It has been there all along. And almost no one talks about it.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SECTION 5 — UV Risk -->
+  <section class="dv-section s5">
+    <div class="section-header">
+      <span class="section-num">Section 05</span>
+      <h2>UV Risk: <span class="accent">Malaysia's Hidden Sun Hazard</span></h2>
+    </div>
+    <div class="section-narrative">
+      <p>Unlike heat, rain, or haze, UV leaves no visible warning. The sky can be blue. The air clean. The temperature mild. And the UV index can still be at 12 — classified as Extreme by the WHO — quietly burning unprotected skin in under 15 minutes and accumulating damage over years that the body cannot reverse. The WHO classifies UV index 6 and above as High risk. Malaysia's median across all states sits well above 10. There is no state, no season, no corner of this map where that risk is low. This is what it means to live this close to the Equator.</p>
+    </div>
+
+    <div class="section-body">
+
+      <!-- Chart 9 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">UV Exposure Risk Across Malaysia</div>
+            <div class="chart-subtitle">Proportional symbol map · circle size &amp; colour = median monthly peak UV index per state · 2014–2024 · Kaggle UV dataset</div>
+          </div>
+          <div id="chart9" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>Almost every state records a median UV above 10 — all classified Extreme</strong>
+            Selangor leads — median peak UV of 14. Perlis at 13. Sabah, Sarawak, Melaka, Perak, and Pahang all at 12. The national all-time record: UV 20, in Negeri Sembilan, May 2023. At that level, unprotected skin burns in under 10 minutes. Nowhere in Malaysia is UV a minor concern. Nowhere.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 10 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Combined Climate Risk Profile by State</div>
+            <div class="chart-subtitle">Bubble plot · x = average annual temperature · y = median peak UV index · size = average annual rainfall · 2014–2024 combined sources</div>
+          </div>
+          <div id="chart10" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024) · World Bank Climate Knowledge Portal (CCKP)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>Selangor. UV 14. Temperature above 28°C. Top-right danger zone — alone.</strong>
+            No other state combines both. Perlis sits nearby at UV 13. Sarawak tells the opposite story — the largest bubble on the chart at 3,609 mm of annual rainfall, but sitting further left with cooler temperatures and lower UV. No state sits in the safe bottom-left corner. Every Malaysian state carries at least one significant climate risk. Most carry two or three at once.
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Chart 12 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Top 5 Highest UV Readings by State</div>
+            <div class="chart-subtitle">Interactive bar chart · select a state to view its five highest recorded peak UV values and when they occurred · 2014–2024 · Kaggle UV dataset</div>
+          </div>
+          <div id="chart12" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>Negeri Sembilan's UV 20 in May 2023 stands alone as Malaysia's all-time record</strong>
+            Select any state to explore its five worst UV readings and exactly when they occurred. Negeri Sembilan is the default — its record of 20 in May 2023 dwarfs the next entry at 16. Most states cluster their worst readings in February, March, and October — months when the sun angle is highest relative to Malaysia's latitude and cloud cover is thinner. No month is safe. No state is exempt.
+          </div>
+        </div>
+      </div>
+
+            <!-- Section 5 Summary -->
+      <div class="section-summary">
+        <div class="summary-label">Section Summary</div>
+        <p>Malaysia's weather is not one risk. It is four — and they stack.</p>
+        <p>Temperatures up 2.8°C in a decade. Rainfall up 35% in under ten years. Haze arriving uninvited from across the border. UV classified as Extreme in every single state, every single day.</p>
+        <p>No Malaysian state escapes at least one of these. Most face several at once.</p>
+        <p>The data is not here to alarm. It is here to inform. Check the API before going outside during haze season. Stay indoors during peak heat in March, April, and May. Wear sunscreen — every day. Not just at the beach.</p>
+        <p>Malaysia's weather has always been demanding. The data shows it is becoming more so. Knowing that is where protection begins.</p>
+      </div>
+
+    </div>
+  </section>
+
+<footer class="dv-footer">
+  <div class="footer-inner">
+    <div class="footer-block">
+      <h4>Data Sources</h4>
+      <p><a href="https://www.kaggle.com/datasets/shahmirvarqha/weather-data-malaysia" target="_blank">Kaggle — Malaysia Weather Data (1996–2024)</a></p>
+      <p><a href="https://climateknowledgeportal.worldbank.org/country/malaysia/climate-data-historical" target="_blank">World Bank Climate Knowledge Portal (CCKP) — ERA5 &amp; CRU TS4.08</a></p>
+      <p><a href="https://www.kaggle.com/datasets/ynshung/malaysia-air-pollution-index" target="_blank">Kaggle — Malaysia Air Pollution Index</a></p>
+      <p><a href="https://data.gov.my/data-catalogue/air_pollution" target="_blank">data.gov.my — Department of Environment Malaysia</a></p>
+    </div>
+    <div class="footer-block">
+      <h4>Authorship</h4>
+      <p>Author: Muhammad Azfar Haziq Hamizan</p>
+      <p>Student ID: 35574127</p>
+      <p>FIT3179 · Data Visualisation 2 · Monash University Malaysia</p>
+      <p>Published: May 2026</p>
+    </div>
+    <div class="footer-block">
+      <h4>Visualisation Library</h4>
+      <p>All charts and maps built with <a href="https://vega.github.io/vega-lite/" target="_blank">Vega-Lite v5</a></p>
+      <p>Page layout: plain HTML/CSS (no external CSS framework)</p>
+      <p>Fonts: Playfair Display + Outfit (Google Fonts)</p>
+    </div>
+    <div class="ai-ack">
+      <strong>AI Acknowledgement:</strong> Generative AI tools (Claude by Anthropic) were used to assist with Vega-Lite JSON specification syntax, CSS layout, and grammar/style checking of narrative text, in accordance with FIT2179 unit policy. All data, design decisions, story structure, and analytical interpretations are the author's own work.
+    </div>
+  </div>
+</footer>
+
+<script src="vega_lite_vis.js"></script>
+
+</body>
+</html>

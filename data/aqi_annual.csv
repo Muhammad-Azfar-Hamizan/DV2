@@ -1,0 +1,19 @@
+year,unhealthy_days,worst_event,annotate
+2005,2,,False
+2006,66,,True
+2007,14,,False
+2008,25,,False
+2009,49,,False
+2010,31,,False
+2011,30,,False
+2012,31,,False
+2013,51,Sumatra fires,True
+2014,119,Riau fires,True
+2015,103,Indonesia peat fires,True
+2016,6,,False
+2017,42,,False
+2018,31,,False
+2019,90,Kalimantan fires,True
+2020,15,,False
+2021,31,,False
+2022,16,,False

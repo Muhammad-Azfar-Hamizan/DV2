@@ -1,0 +1,229 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 570,
+  "height": 240,
+  "projection": {
+    "type": "equalEarth",
+    "center": [
+      109,
+      3.8
+    ],
+    "scale": 1900
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "js/malaysia.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#d0d0d0",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "js/malaysia.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.name",
+          "from": {
+            "data": {
+              "values": [
+                {
+                  "name": "Johor",
+                  "avg_temp_2024": 27.41,
+                  "avg_monthly_rainfall_2024": 246.16,
+                  "total_rainfall_2024": 2953.93
+                },
+                {
+                  "name": "Kedah",
+                  "avg_temp_2024": 27.49,
+                  "avg_monthly_rainfall_2024": 243.83,
+                  "total_rainfall_2024": 2925.93
+                },
+                {
+                  "name": "Kelantan",
+                  "avg_temp_2024": 26.15,
+                  "avg_monthly_rainfall_2024": 253.2,
+                  "total_rainfall_2024": 3038.37
+                },
+                {
+                  "name": "Kuala Lumpur",
+                  "avg_temp_2024": 26.73,
+                  "avg_monthly_rainfall_2024": 332.92,
+                  "total_rainfall_2024": 3995.03
+                },
+                {
+                  "name": "Melaka",
+                  "avg_temp_2024": 27.85,
+                  "avg_monthly_rainfall_2024": 224.28,
+                  "total_rainfall_2024": 2691.35
+                },
+                {
+                  "name": "Negeri Sembilan",
+                  "avg_temp_2024": 27.29,
+                  "avg_monthly_rainfall_2024": 247.45,
+                  "total_rainfall_2024": 2969.39
+                },
+                {
+                  "name": "Pahang",
+                  "avg_temp_2024": 26.9,
+                  "avg_monthly_rainfall_2024": 235.92,
+                  "total_rainfall_2024": 2831.01
+                },
+                {
+                  "name": "Perak",
+                  "avg_temp_2024": 26.24,
+                  "avg_monthly_rainfall_2024": 291.98,
+                  "total_rainfall_2024": 3503.81
+                },
+                {
+                  "name": "Perlis",
+                  "avg_temp_2024": 28.12,
+                  "avg_monthly_rainfall_2024": 207.72,
+                  "total_rainfall_2024": 2492.59
+                },
+                {
+                  "name": "Pulau Pinang",
+                  "avg_temp_2024": 28.4,
+                  "avg_monthly_rainfall_2024": 269.19,
+                  "total_rainfall_2024": 3230.27
+                },
+                {
+                  "name": "Sabah",
+                  "avg_temp_2024": 26.23,
+                  "avg_monthly_rainfall_2024": 224.0,
+                  "total_rainfall_2024": 2687.94
+                },
+                {
+                  "name": "Sarawak",
+                  "avg_temp_2024": 26.06,
+                  "avg_monthly_rainfall_2024": 336.65,
+                  "total_rainfall_2024": 4039.83
+                },
+                {
+                  "name": "Selangor",
+                  "avg_temp_2024": 27.51,
+                  "avg_monthly_rainfall_2024": 298.14,
+                  "total_rainfall_2024": 3577.67
+                },
+                {
+                  "name": "Terengganu",
+                  "avg_temp_2024": 26.72,
+                  "avg_monthly_rainfall_2024": 275.18,
+                  "total_rainfall_2024": 3302.13
+                },
+                {
+                  "name": "Labuan",
+                  "avg_temp_2024": 28.11,
+                  "avg_monthly_rainfall_2024": 196.57,
+                  "total_rainfall_2024": 2358.84
+                }
+              ]
+            },
+            "key": "name",
+            "fields": [
+              "avg_temp_2024",
+              "avg_monthly_rainfall_2024",
+              "total_rainfall_2024",
+              "name"
+            ]
+          }
+        },
+        {
+          "calculate": "datum.avg_temp_2024 < 26.5 ? '< 26.5\u00b0C' : datum.avg_temp_2024 < 27.0 ? '26.5\u201327.0\u00b0C' : datum.avg_temp_2024 < 27.5 ? '27.0\u201327.5\u00b0C' : datum.avg_temp_2024 < 28.0 ? '27.5\u201328.0\u00b0C' : '\u2265 28.0\u00b0C'",
+          "as": "temp_bin"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "color": {
+          "field": "temp_bin",
+          "type": "ordinal",
+          "scale": {
+            "domain": [
+              "< 26.5\u00b0C",
+              "26.5\u201327.0\u00b0C",
+              "27.0\u201327.5\u00b0C",
+              "27.5\u201328.0\u00b0C",
+              "\u2265 28.0\u00b0C"
+            ],
+            "range": [
+              "#fdd49e",
+              "#fdbb84",
+              "#fc8d59",
+              "#e34a33",
+              "#b30000"
+            ]
+          },
+          "legend": {
+            "title": "Average Temperature (\u00b0C)",
+            "orient": "right",
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "titleFontSize": 10,
+            "labelFontSize": 10,
+            "titlePadding": 6,
+            "offset": 8,
+            "symbolType": "square",
+            "symbolSize": 150
+          }
+        },
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "avg_temp_2024",
+            "type": "quantitative",
+            "title": "Average Temperature (\u00b0C)",
+            "format": ".2f"
+          },
+          {
+            "field": "avg_monthly_rainfall_2024",
+            "type": "quantitative",
+            "title": "Average Monthly Rainfall (mm)",
+            "format": ".1f"
+          },
+          {
+            "field": "total_rainfall_2024",
+            "type": "quantitative",
+            "title": "Total Rainfall 2024 (mm)",
+            "format": ".0f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "legend": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a"
+    },
+    "title": {
+      "color": "#1a1a1a",
+      "subtitleColor": "#555555"
+    }
+  }
+}

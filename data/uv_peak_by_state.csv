@@ -1,0 +1,17 @@
+state,latitude,longitude,median_peak_uv,avg_peak_uv,record_peak_uv,record_year,record_month,months_of_data,uv_category
+Johor,1.8,103.8,11.0,11.2,17.0,2022,Feb,119,Extreme
+Kedah,6.0,100.9,11.0,11.0,16.0,2015,Mar,119,Extreme
+Kelantan,5.20,102.00,11.0,10.6,16.0,2015,Mar,119,Extreme
+Kuala Lumpur,3.15,101.65,11.0,11.2,15.0,2020,Oct,119,Extreme
+Labuan,5.28,115.23,10.0,10.5,16.0,2015,Oct,119,Very High
+Melaka,2.19,102.25,12.0,11.5,16.0,2021,Aug,119,Extreme
+Negeri Sembilan,2.62,102.05,8.0,8.8,20.0,2023,May,33,Very High
+Pahang,3.50,102.50,12.0,11.5,15.0,2019,Sep,119,Extreme
+Perak,4.70,101.20,12.0,11.4,14.0,2020,Feb,119,Extreme
+Perlis,6.5,100.2,13.0,13.0,15.0,2022,Aug,29,Extreme
+Pulau Pinang,5.35,100.2,10.0,11.1,16.0,2021,Oct,119,Very High
+Putrajaya,2.92,101.70,10.0,10.1,15.0,2022,Jun,29,Very High
+Sabah,5.98,116.08,12.0,11.9,15.0,2020,Nov,119,Extreme
+Sarawak,2.5,113.0,12.0,11.8,15.0,2016,Mar,119,Extreme
+Selangor,3.70,100.80,14.0,12.1,16.0,2021,Sep,119,Extreme
+Terengganu,5.0,103.2,11.0,10.7,16.0,2022,Mar,119,Extreme

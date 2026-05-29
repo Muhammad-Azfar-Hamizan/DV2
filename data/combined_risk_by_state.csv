@@ -1,0 +1,17 @@
+state,uv_score,rainfall_score,heat_score,aqi_score
+Johor,0.5,0.373,0.609,0
+Kedah,0.5,0.291,0.783,0
+Kelantan,0.5,0.443,0.435,0
+Kuala Lumpur,0.5,0.652,1.0,0
+Labuan,0.333,0.0,0.522,0
+Melaka,0.667,0.161,0.739,0
+Negeri Sembilan,0.0,0.225,0.652,0
+Pahang,0.667,0.307,0.261,0
+Perak,0.667,0.507,0.739,0
+Perlis,0.833,0.056,0.783,0
+Pulau Pinang,0.333,0.406,1.0,0
+Putrajaya,0.333,0.652,1.0,0
+Sabah,0.667,0.435,0.522,0
+Sarawak,0.667,1.0,0.0,0
+Selangor,1.0,0.4,0.826,0
+Terengganu,0.5,0.756,0.522,0

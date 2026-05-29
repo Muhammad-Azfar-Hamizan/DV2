@@ -1,0 +1,17 @@
+state,avg_temp,median_uv,avg_rainfall,region
+Johor,27.5,11.0,2605.7,Peninsular
+Kedah,27.9,11.0,2473.9,Peninsular
+Kelantan,27.1,11.0,2717.5,Peninsular
+Kuala Lumpur,28.4,11.0,3051.5,Peninsular
+Labuan,27.3,10.0,2009.1,Borneo
+Melaka,27.8,12.0,2267.2,Peninsular
+Negeri Sembilan,27.6,8.0,2369.7,Peninsular
+Pahang,26.7,12.0,2500.7,Peninsular
+Perak,27.8,12.0,2820.1,Peninsular
+Perlis,27.9,13.0,2098.2,Peninsular
+Pulau Pinang,28.4,10.0,2657.9,Peninsular
+Putrajaya,28.4,10.0,3051.5,Peninsular
+Sabah,27.3,12.0,2704.4,Borneo
+Sarawak,26.1,12.0,3608.8,Borneo
+Selangor,28.0,14.0,2649.4,Peninsular
+Terengganu,27.3,11.0,3218.0,Peninsular

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 640,
+  "height": 300,
+  "data": { "url": "data/pm25_monthly.csv" },
+  "layer": [
+
+    {
+      "mark": { "type": "bar", "tooltip": true },
+      "encoding": {
+        "x": {
+          "field": "date", "type": "temporal",
+          "title": "Month",
+          "axis": {
+            "format": "%b %Y",
+            "labelAngle": -40,
+            "values": [
+              "2018-01-01", "2018-07-01",
+              "2019-01-01", "2019-07-01",
+              "2020-01-01", "2020-07-01",
+              "2021-01-01", "2021-07-01",
+              "2022-01-01", "2022-07-01", "2022-12-01"
+            ],
+            "labelOverlap": false,
+            "labelFontSize": 9,
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "domainColor": "#cccccc",
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "concentration", "type": "quantitative",
+          "title": "PM₂.₅ Concentration (µg/m³)",
+          "scale": { "domain": [0, 60] },
+          "axis": {
+            "labelColor": "#555555", "titleColor": "#1a1a1a",
+            "gridColor": "#e0e0e0", "domainColor": "#cccccc",
+            "labelFontSize": 10, "titleFontSize": 11
+          }
+        },
+        "color": {
+          "field": "risk", "type": "nominal",
+          "title": "Risk Level",
+          "scale": {
+            "domain": ["Good (≤15)", "Moderate (15–35)", "Unhealthy (>35)"],
+            "range":  ["#4A7C4E",   "#E8A020",            "#963068"]
+          },
+          "legend": {
+            "title": "Risk Level",
+            "titleFontSize": 9, "labelFontSize": 9,
+            "labelColor": "#555555", "titleColor": "#1a1a1a",
+            "orient": "top-right", "offset": 4
+          }
+        },
+        "tooltip": [
+          { "field": "date",          "type": "temporal",     "title": "Month",                       "format": "%B %Y" },
+          { "field": "concentration", "type": "quantitative", "title": "PM₂.₅ Concentration (µg/m³)", "format": ".2f" },
+          { "field": "risk",          "type": "nominal",      "title": "Risk Level" }
+        ]
+      }
+    },
+
+    {
+      "description": "WHO guideline dashed rule at y=15",
+      "mark": { "type": "rule", "strokeDash": [6, 4], "color": "#444444", "opacity": 0.55, "strokeWidth": 1.5 },
+      "encoding": { "y": { "datum": 15, "type": "quantitative" } }
+    },
+
+    {
+      "description": "WHO guideline label — absolute x pin to right edge",
+      "data": { "values": [{}] },
+      "mark": { "type": "text", "x": 635, "align": "right", "dy": -7, "fontSize": 8.5, "color": "#444444", "fontStyle": "italic" },
+      "encoding": {
+        "y":    { "datum": 15 },
+        "text": { "value": "WHO guideline: 15 µg/m³" }
+      }
+    },
+
+    {
+      "description": "Sep 2019 callout — short horizontal line extending right from bar top",
+      "data": {
+        "values": [
+          { "x": "2019-09-01", "y": 52.9 },
+          { "x": "2020-03-01", "y": 52.9 }
+        ]
+      },
+      "mark": { "type": "line", "color": "#555555", "strokeWidth": 1, "opacity": 0.8 },
+      "encoding": {
+        "x": { "field": "x", "type": "temporal" },
+        "y": { "field": "y", "type": "quantitative", "scale": { "domain": [0, 60] } }
+      }
+    },
+
+    {
+      "description": "Sep 2019 callout — label immediately right of the line end",
+      "data": { "values": [{ "x": "2020-03-01", "y": 52.9 }] },
+      "mark": { "type": "text", "align": "left", "baseline": "middle", "dx": 4, "fontSize": 9, "fontWeight": "bold", "color": "#963068" },
+      "encoding": {
+        "x":    { "field": "x", "type": "temporal" },
+        "y":    { "field": "y", "type": "quantitative", "scale": { "domain": [0, 60] } },
+        "text": { "value": "Sep 2019: 52.9 µg/m³ — Kalimantan peat fires" }
+      }
+    }
+
+  ],
+  "config": {
+    "background": "transparent",
+    "view": { "stroke": null },
+    "axis": { "labelColor": "#555555", "titleColor": "#1a1a1a", "gridColor": "#e0e0e0", "domainColor": "#cccccc" },
+    "legend": { "labelColor": "#555555", "titleColor": "#1a1a1a" },
+    "title": { "color": "#1a1a1a", "subtitleColor": "#555555" }
+  }
+}

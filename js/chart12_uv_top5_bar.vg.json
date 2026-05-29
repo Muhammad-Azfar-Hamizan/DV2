@@ -1,0 +1,202 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 480,
+  "height": 220,
+  "data": {
+    "url": "data/uv_top5_by_state.csv"
+  },
+  "params": [
+    {
+      "name": "selected_state",
+      "value": "Negeri Sembilan",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Kuala Lumpur",
+          "Labuan",
+          "Melaka",
+          "Negeri Sembilan",
+          "Pahang",
+          "Perak",
+          "Perlis",
+          "Pulau Pinang",
+          "Putrajaya",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu"
+        ],
+        "name": "Select a state: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.state === selected_state"
+    },
+    {
+      "calculate": "'#' + datum.rank + ' — ' + datum.when",
+      "as": "rank_label"
+    }
+  ],
+  "layer": [
+    {
+      "comment": "Background bar track — full width reference line at max domain",
+      "mark": {
+        "type": "bar",
+        "color": "#f0ebe0",
+        "cornerRadiusTopRight": 4,
+        "cornerRadiusBottomRight": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "rank_label",
+          "type": "ordinal",
+          "sort": {"field": "rank", "order": "ascending"},
+          "axis": {
+            "title": null,
+            "labelFontSize": 9,
+            "labelColor": "#555555",
+            "domainColor": "#cccccc",
+            "tickColor": "#cccccc",
+            "labelLimit": 200
+          }
+        },
+        "x": {
+          "value": 480
+        }
+      }
+    },
+    {
+      "comment": "Main UV bars",
+      "mark": {
+        "type": "bar",
+        "cornerRadiusTopRight": 4,
+        "cornerRadiusBottomRight": 4
+      },
+      "encoding": {
+        "y": {
+          "field": "rank_label",
+          "type": "ordinal",
+          "sort": {"field": "rank", "order": "ascending"},
+          "axis": {
+            "title": null,
+            "labelFontSize": 9,
+            "labelColor": "#555555",
+            "domainColor": "#cccccc",
+            "tickColor": "#cccccc",
+            "labelLimit": 200
+          }
+        },
+        "x": {
+          "field": "uv",
+          "type": "quantitative",
+          "title": "Peak UV Index",
+          "scale": {"domain": [0, 21], "zero": true},
+          "axis": {
+            "titleFontSize": 10,
+            "titleColor": "#555555",
+            "labelFontSize": 9,
+            "labelColor": "#555555",
+            "gridColor": "#eeeeee",
+            "domainColor": "#cccccc",
+            "tickCount": 7
+          }
+        },
+        "color": {
+          "field": "uv",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "yelloworangered",
+            "domain": [10, 20]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "uv", "type": "quantitative", "title": "Peak UV Index"},
+          {"field": "when", "type": "nominal", "title": "Recorded"},
+          {"field": "rank", "type": "quantitative", "title": "Rank"}
+        ]
+      }
+    },
+    {
+      "comment": "UV value label at end of bar",
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 10,
+        "fontWeight": "bold",
+        "color": "#2a1800"
+      },
+      "encoding": {
+        "y": {
+          "field": "rank_label",
+          "type": "ordinal",
+          "sort": {"field": "rank", "order": "ascending"}
+        },
+        "x": {
+          "field": "uv",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "uv",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    },
+    {
+      "comment": "WHO Extreme threshold line at UV 11",
+      "data": {"values": [{"threshold": 11}]},
+      "mark": {
+        "type": "rule",
+        "strokeDash": [4, 3],
+        "color": "#c0392b",
+        "opacity": 0.6,
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "x": {
+          "field": "threshold",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "comment": "WHO Extreme label",
+      "data": {"values": [{"threshold": 11, "label": "WHO Extreme (11+)"}]},
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "dy": -6,
+        "fontSize": 7.5,
+        "fontStyle": "italic",
+        "color": "#c0392b",
+        "opacity": 0.8
+      },
+      "encoding": {
+        "x": {"field": "threshold", "type": "quantitative"},
+        "y": {"value": 5},
+        "text": {"field": "label", "type": "nominal"}
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": null},
+    "axis": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a",
+      "gridColor": "#e0e0e0",
+      "domainColor": "#cccccc"
+    },
+    "legend": {"labelColor": "#555555", "titleColor": "#1a1a1a"},
+    "title": {"color": "#1a1a1a", "subtitleColor": "#555555"}
+  }
+}

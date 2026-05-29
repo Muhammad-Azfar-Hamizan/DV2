@@ -1,0 +1,312 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Chart 3 \u2014 Annual absolute peak temperature trend for Malaysia (2014\u20132024)",
+  "width": 640,
+  "height": 280,
+  "data": {
+    "url": "data/annual_temperature.csv"
+  },
+  "resolve": {
+    "scale": {
+      "y": "shared"
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "opacity": 0.13,
+        "color": "#b85c1a"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "abs_peak_mean",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              33,
+              43
+            ],
+            "zero": false
+          },
+          "axis": {
+            "title": "Temperature (\u00b0C)",
+            "grid": true,
+            "gridOpacity": 0.25,
+            "tickCount": 6,
+            "labelFontSize": 11,
+            "titleFontSize": 11,
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "gridColor": "#e0e0e0",
+            "domainColor": "#cccccc"
+          }
+        },
+        "y2": {
+          "field": "abs_peak_max"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "loess": "abs_peak_mean",
+          "on": "year",
+          "as": [
+            "year",
+            "loess_mean"
+          ]
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeDash": [
+          6,
+          3
+        ],
+        "strokeWidth": 1.8,
+        "color": "#888888",
+        "opacity": 0.75
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "loess_mean",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2,
+        "color": "#7a2d00",
+        "opacity": 0.5,
+        "strokeDash": [
+          3,
+          3
+        ]
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "abs_peak_max",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "color": "#b85c1a"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "axis": {
+            "title": "Year",
+            "labelAngle": 0,
+            "grid": false,
+            "labelFontSize": 11,
+            "labelColor": "#555555",
+            "titleColor": "#1a1a1a",
+            "domainColor": "#cccccc"
+          }
+        },
+        "y": {
+          "field": "abs_peak_mean",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 65,
+        "color": "#b85c1a"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "abs_peak_mean",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "abs_peak_mean",
+            "type": "quantitative",
+            "title": "Average Peak Temperature (\u00b0C)",
+            "format": ".1f"
+          },
+          {
+            "field": "abs_peak_max",
+            "type": "quantitative",
+            "title": "Highest Recorded (\u00b0C)",
+            "format": ".1f"
+          },
+          {
+            "field": "label",
+            "type": "nominal",
+            "title": "Event"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 45,
+        "color": "#7a2d00",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "abs_peak_max",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "abs_peak_max",
+            "type": "quantitative",
+            "title": "Highest Recorded (\u00b0C)",
+            "format": ".1f"
+          },
+          {
+            "field": "abs_peak_mean",
+            "type": "quantitative",
+            "title": "Average Peak Temperature (\u00b0C)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "datum.el_nino == true"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -10,
+        "fontSize": 9.5,
+        "fontStyle": "italic",
+        "fontWeight": "bold",
+        "color": "#7a2d00"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "abs_peak_mean",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "ly": 42.3,
+            "label": "Hottest state recorded"
+          },
+          {
+            "ly": 38.5,
+            "label": "Average across all states"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "fontSize": 9.5,
+        "fontWeight": "bold",
+        "x": 635
+      },
+      "encoding": {
+        "y": {
+          "field": "ly",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        },
+        "color": {
+          "field": "label",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Hottest state recorded",
+              "Average across all states"
+            ],
+            "range": [
+              "#7a2d00",
+              "#b85c1a"
+            ]
+          },
+          "legend": null
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a",
+      "gridColor": "#e0e0e0",
+      "domainColor": "#cccccc"
+    },
+    "legend": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a"
+    },
+    "title": {
+      "color": "#1a1a1a",
+      "subtitleColor": "#555555"
+    }
+  }
+}

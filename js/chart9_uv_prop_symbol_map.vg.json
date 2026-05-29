@@ -1,0 +1,253 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 670,
+  "height": 300,
+  "projection": {
+    "type": "equalEarth",
+    "center": [
+      108.5,
+      3.8
+    ],
+    "scale": 2200
+  },
+  "layer": [
+    {
+      "comment": "LAYER 1 \u2014 Malaysia base map",
+      "data": {
+        "url": "js/malaysia.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "ne_10m_admin_1_states_provinces"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0ebe0",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
+      }
+    },
+    {
+      "comment": "LAYER 2 \u2014 Proportional symbol circles per state",
+      "data": {
+        "url": "data/uv_peak_by_state.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.75,
+        "stroke": "#7a5c00",
+        "strokeWidth": 0.8
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "size": {
+          "field": "median_peak_uv",
+          "type": "quantitative",
+          "title": "Median Peak UV Index",
+          "scale": {
+            "domain": [
+              7,
+              14
+            ],
+            "range": [
+              40,
+              260
+            ]
+          },
+          "legend": {
+            "title": "Median Peak UV Index",
+            "titleFontSize": 10,
+            "labelFontSize": 9,
+            "titleColor": "#1a1a1a",
+            "labelColor": "#555555",
+            "orient": "bottom-right",
+            "offset": 4,
+            "values": [
+              8,
+              10,
+              12,
+              14
+            ]
+          }
+        },
+        "color": {
+          "field": "median_peak_uv",
+          "type": "quantitative",
+          "title": "Median Peak UV Index",
+          "scale": {
+            "scheme": "yelloworangered",
+            "domain": [
+              7,
+              14
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "median_peak_uv",
+            "type": "quantitative",
+            "title": "Typical Peak UV Index (Median)",
+            "format": ".1f"
+          },
+          {
+            "field": "avg_peak_uv",
+            "type": "quantitative",
+            "title": "Average Peak UV Index",
+            "format": ".1f"
+          },
+          {
+            "field": "record_peak_uv",
+            "type": "quantitative",
+            "title": "All-Time Record UV Index"
+          },
+          {
+            "field": "record_month",
+            "type": "nominal",
+            "title": "Record Month"
+          },
+          {
+            "field": "record_year",
+            "type": "nominal",
+            "title": "Record Year"
+          },
+          {
+            "field": "uv_category",
+            "type": "nominal",
+            "title": "Risk Category"
+          }
+        ]
+      }
+    },
+    {
+      "comment": "LAYER 3 \u2014 UV value labels inside bubbles",
+      "data": {
+        "url": "data/uv_peak_by_state.csv"
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 8,
+        "fontWeight": "bold",
+        "align": "center",
+        "baseline": "middle",
+        "color": "#2a1800"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "median_peak_uv",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    },
+    {
+      "comment": "LAYER 4a \u2014 Kuala Lumpur label on the LEFT",
+      "data": {
+        "url": "data/uv_peak_by_state.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.state === 'Kuala Lumpur'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 7.5,
+        "fontWeight": "500",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -10,
+        "color": "#2a1800"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "comment": "LAYER 4b \u2014 Putrajaya label on the RIGHT",
+      "data": {
+        "url": "data/uv_peak_by_state.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.state === 'Putrajaya'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 6.5,
+        "fontWeight": "500",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "color": "#2a1800",
+        "dy": 0
+      },
+      "encoding": {
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "state",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+  "config": {
+    "background": "transparent",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a",
+      "gridColor": "#e0e0e0",
+      "domainColor": "#cccccc"
+    },
+    "legend": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a"
+    },
+    "title": {
+      "color": "#1a1a1a",
+      "subtitleColor": "#555555"
+    }
+  }
+}

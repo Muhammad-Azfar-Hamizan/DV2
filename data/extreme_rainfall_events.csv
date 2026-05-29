@@ -1,0 +1,166 @@
+year,state,annual_rainfall,severity_index,event_name,displaced,label_visible,is_flood
+2014,Johor,2696.1,103.5,,0,False,False
+2015,Johor,2269.1,87.1,,0,False,False
+2016,Johor,2325.9,89.3,,0,False,False
+2017,Johor,2814.1,108.0,Johor Flash Floods (Mar 2017),12000,False,True
+2018,Johor,2648.4,101.6,,0,False,False
+2019,Johor,2170.0,83.3,Johor Floods (Dec 2019),30000,False,True
+2020,Johor,2605.7,100.0,,0,False,False
+2021,Johor,2728.3,104.7,,0,False,False
+2022,Johor,2615.1,100.4,,0,False,False
+2023,Johor,2836.6,108.9,,0,False,False
+2024,Johor,2953.9,113.4,,0,False,False
+2014,Kedah,2452.6,99.1,,0,False,False
+2015,Kedah,2227.7,90.0,,0,False,False
+2016,Kedah,2130.6,86.1,,0,False,False
+2017,Kedah,2704.4,109.3,,0,False,False
+2018,Kedah,2446.4,98.9,,0,False,False
+2019,Kedah,1989.9,80.4,,0,False,False
+2020,Kedah,2460.4,99.5,,0,False,False
+2021,Kedah,2384.9,96.4,,0,False,False
+2022,Kedah,2723.0,110.1,,0,False,False
+2023,Kedah,2766.7,111.8,,0,False,False
+2024,Kedah,2925.9,118.3,,0,False,False
+2014,Kelantan,2747.7,101.1,Kelantan Great Flood (Dec 2014),200000,True,True
+2015,Kelantan,2076.2,76.4,,0,False,False
+2016,Kelantan,2066.0,76.0,,0,False,False
+2017,Kelantan,3157.8,116.2,,0,False,False
+2018,Kelantan,2421.6,89.1,,0,False,False
+2019,Kelantan,2269.9,83.5,,0,False,False
+2020,Kelantan,2749.0,101.2,,0,False,False
+2021,Kelantan,2777.6,102.2,,0,False,False
+2022,Kelantan,3293.4,121.2,Kelantan Floods (Jan 2022),25000,False,True
+2023,Kelantan,3294.5,121.2,,0,False,False
+2024,Kelantan,3038.4,111.8,,0,False,False
+2014,Kuala Lumpur,3380.8,110.8,,0,False,False
+2015,Kuala Lumpur,3081.9,101.0,,0,False,False
+2016,Kuala Lumpur,2463.3,80.7,,0,False,False
+2017,Kuala Lumpur,2971.9,97.4,,0,False,False
+2018,Kuala Lumpur,3188.2,104.5,,0,False,False
+2019,Kuala Lumpur,2531.5,83.0,,0,False,False
+2020,Kuala Lumpur,3079.0,100.9,,0,False,False
+2021,Kuala Lumpur,2811.5,92.1,,0,False,False
+2022,Kuala Lumpur,2743.5,89.9,,0,False,False
+2023,Kuala Lumpur,3319.5,108.8,,0,False,False
+2024,Kuala Lumpur,3995.0,130.9,,0,False,False
+2014,Melaka,2652.8,117.0,,0,False,False
+2015,Melaka,1984.0,87.5,,0,False,False
+2016,Melaka,1998.7,88.2,,0,False,False
+2017,Melaka,2452.4,108.2,,0,False,False
+2018,Melaka,2314.6,102.1,,0,False,False
+2019,Melaka,1700.1,75.0,,0,False,False
+2020,Melaka,2346.8,103.5,,0,False,False
+2021,Melaka,2243.4,99.0,,0,False,False
+2022,Melaka,2103.7,92.8,,0,False,False
+2023,Melaka,2451.1,108.1,,0,False,False
+2024,Melaka,2691.3,118.7,,0,False,False
+2014,Negeri Sembilan,2686.6,113.4,,0,False,False
+2015,Negeri Sembilan,2048.6,86.4,,0,False,False
+2016,Negeri Sembilan,2026.4,85.5,,0,False,False
+2017,Negeri Sembilan,2543.8,107.3,,0,False,False
+2018,Negeri Sembilan,2447.6,103.3,,0,False,False
+2019,Negeri Sembilan,1863.5,78.6,,0,False,False
+2020,Negeri Sembilan,2444.1,103.1,,0,False,False
+2021,Negeri Sembilan,2252.8,95.1,,0,False,False
+2022,Negeri Sembilan,2323.4,98.0,,0,False,False
+2023,Negeri Sembilan,2460.5,103.8,,0,False,False
+2024,Negeri Sembilan,2969.4,125.3,,0,False,False
+2014,Pahang,2565.5,102.6,,0,False,False
+2015,Pahang,2029.4,81.2,,0,False,False
+2016,Pahang,2128.8,85.1,,0,False,False
+2017,Pahang,2780.5,111.2,,0,False,False
+2018,Pahang,2534.4,101.3,,0,False,False
+2019,Pahang,1911.3,76.4,,0,False,False
+2020,Pahang,2560.4,102.4,,0,False,False
+2021,Pahang,2577.4,103.1,NE Monsoon Floods (Dec 2021),20000,False,True
+2022,Pahang,2773.2,110.9,,0,False,False
+2023,Pahang,2815.9,112.6,,0,False,False
+2024,Pahang,2831.0,113.2,,0,False,False
+2014,Perak,2873.0,101.9,,0,False,False
+2015,Perak,2697.4,95.6,,0,False,False
+2016,Perak,2208.6,78.3,,0,False,False
+2017,Perak,2950.8,104.6,,0,False,False
+2018,Perak,2834.1,100.5,,0,False,False
+2019,Perak,2310.5,81.9,,0,False,False
+2020,Perak,2812.1,99.7,,0,False,False
+2021,Perak,2698.6,95.7,,0,False,False
+2022,Perak,2878.0,102.1,,0,False,False
+2023,Perak,3254.1,115.4,,0,False,False
+2024,Perak,3503.8,124.2,,0,False,False
+2014,Perlis,1915.4,91.3,,0,False,False
+2015,Perlis,1857.8,88.5,,0,False,False
+2016,Perlis,1891.5,90.1,,0,False,False
+2017,Perlis,2343.6,111.7,,0,False,False
+2018,Perlis,2044.4,97.4,,0,False,False
+2019,Perlis,1634.5,77.9,,0,False,False
+2020,Perlis,2083.8,99.3,,0,False,False
+2021,Perlis,2093.9,99.8,,0,False,False
+2022,Perlis,2392.0,114.0,,0,False,False
+2023,Perlis,2331.1,111.1,,0,False,False
+2024,Perlis,2492.6,118.8,,0,False,False
+2014,Pulau Pinang,2667.1,100.3,,0,False,False
+2015,Pulau Pinang,2407.8,90.6,,0,False,False
+2016,Pulau Pinang,2361.5,88.8,,0,False,False
+2017,Pulau Pinang,2887.4,108.6,,0,False,False
+2018,Pulau Pinang,2695.2,101.4,,0,False,False
+2019,Pulau Pinang,2153.3,81.0,,0,False,False
+2020,Pulau Pinang,2543.9,95.7,,0,False,False
+2021,Pulau Pinang,2546.4,95.8,,0,False,False
+2022,Pulau Pinang,2635.5,99.2,,0,False,False
+2023,Pulau Pinang,3108.9,117.0,,0,False,False
+2024,Pulau Pinang,3230.3,121.5,,0,False,False
+2014,Sabah,2649.3,98.0,,0,False,False
+2015,Sabah,2177.8,80.5,,0,False,False
+2016,Sabah,2540.0,93.9,,0,False,False
+2017,Sabah,3106.6,114.9,,0,False,False
+2018,Sabah,2510.4,92.8,,0,False,False
+2019,Sabah,2261.7,83.6,,0,False,False
+2020,Sabah,2616.1,96.7,,0,False,False
+2021,Sabah,3126.0,115.6,,0,False,False
+2022,Sabah,3292.1,121.7,,0,False,False
+2023,Sabah,2780.5,102.8,,0,False,False
+2024,Sabah,2687.9,99.4,,0,False,False
+2014,Sarawak,3115.7,86.3,,0,False,False
+2015,Sarawak,3466.6,96.1,,0,False,False
+2016,Sarawak,3405.4,94.4,,0,False,False
+2017,Sarawak,3739.1,103.6,,0,False,False
+2018,Sarawak,3470.7,96.2,,0,False,False
+2019,Sarawak,3112.0,86.2,,0,False,False
+2020,Sarawak,4001.7,110.9,,0,False,False
+2021,Sarawak,3692.1,102.3,,0,False,False
+2022,Sarawak,4130.7,114.5,,0,False,False
+2023,Sarawak,3522.6,97.6,,0,False,False
+2024,Sarawak,4039.8,111.9,,0,False,False
+2014,Selangor,2835.8,107.0,,0,False,False
+2015,Selangor,2449.8,92.5,,0,False,False
+2016,Selangor,2233.2,84.3,,0,False,False
+2017,Selangor,2675.8,101.0,,0,False,False
+2018,Selangor,2646.8,99.9,,0,False,False
+2019,Selangor,2064.8,77.9,,0,False,False
+2020,Selangor,2499.9,94.4,,0,False,False
+2021,Selangor,2388.5,90.2,Klang Valley Floods (Dec 2021),50000,True,True
+2022,Selangor,2603.6,98.3,,0,False,False
+2023,Selangor,3167.6,119.6,,0,False,False
+2024,Selangor,3577.7,135.0,,0,False,False
+2014,Terengganu,3211.8,99.8,NE Monsoon Floods (Dec 2014),45000,False,True
+2015,Terengganu,2441.6,75.9,,0,False,False
+2016,Terengganu,2911.7,90.5,,0,False,False
+2017,Terengganu,3554.8,110.5,,0,False,False
+2018,Terengganu,2965.2,92.1,,0,False,False
+2019,Terengganu,2545.0,79.1,,0,False,False
+2020,Terengganu,3047.6,94.7,,0,False,False
+2021,Terengganu,3554.4,110.5,,0,False,False
+2022,Terengganu,3872.5,120.3,Terengganu Floods (Jan 2022),18000,False,True
+2023,Terengganu,3991.4,124.0,,0,False,False
+2024,Terengganu,3302.1,102.6,,0,False,False
+2014,Labuan,2230.6,111.0,,0,False,False
+2015,Labuan,1891.5,94.1,,0,False,False
+2016,Labuan,1860.6,92.6,,0,False,False
+2017,Labuan,2150.8,107.1,,0,False,False
+2018,Labuan,1623.9,80.8,,0,False,False
+2019,Labuan,1816.9,90.4,,0,False,False
+2020,Labuan,1990.9,99.1,,0,False,False
+2021,Labuan,1997.1,99.4,,0,False,False
+2022,Labuan,2260.5,112.5,,0,False,False
+2023,Labuan,1918.2,95.5,,0,False,False
+2024,Labuan,2358.8,117.4,,0,False,False
