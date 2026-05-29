@@ -665,25 +665,6 @@
         </div>
       </div>
 
-      <!-- Chart 10 -->
-      <div class="chart-layer">
-        <div class="chart-card">
-          <div class="chart-card-header">
-            <div class="chart-title">Combined Climate Risk Profile by State</div>
-            <div class="chart-subtitle">Bubble plot · x = average annual temperature · y = median peak UV index · size = average annual rainfall · 2014–2024 combined sources</div>
-          </div>
-          <div id="chart10" class="vega-container"></div>
-          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024) · World Bank Climate Knowledge Portal (CCKP)</div>
-        </div>
-        <div class="annotation-col">
-          <div class="annotation-box">
-            <strong>Selangor. UV 14. Temperature above 28°C. Top-right danger zone — alone.</strong>
-            No other state combines both. Perlis sits nearby at UV 13. Sarawak tells the opposite story — the largest bubble on the chart at 3,609 mm of annual rainfall, but sitting further left with cooler temperatures and lower UV. No state sits in the safe bottom-left corner. Every Malaysian state carries at least one significant climate risk. Most carry two or three at once.
-          </div>
-        </div>
-      </div>
-
-
       <!-- Chart 12 -->
       <div class="chart-layer">
         <div class="chart-card">
@@ -698,6 +679,42 @@
           <div class="annotation-box">
             <strong>Negeri Sembilan's UV 20 in May 2023 stands alone as Malaysia's all-time record</strong>
             Select any state to explore its five worst UV readings and exactly when they occurred. Negeri Sembilan is the default — its record of 20 in May 2023 dwarfs the next entry at 16. Most states cluster their worst readings in February, March, and October — months when the sun angle is highest relative to Malaysia's latitude and cloud cover is thinner. No month is safe. No state is exempt.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 13 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">When Is UV Worst? A State-by-State Seasonal Pattern</div>
+            <div class="chart-subtitle">Heatmap · each cell = average peak UV index for that state and month · 2014–2024 · Kaggle UV dataset</div>
+          </div>
+          <div id="chart13" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>February, March, and October are consistently Malaysia's worst UV months — across nearly every state</strong>
+            These are the months when the sun crosses closest to the overhead position relative to Malaysia's latitude, and cloud cover is thinner than during the monsoon peak. June and July show a clear dip — the southwest monsoon brings heavier cloud cover that briefly reduces UV intensity. No cell in this grid falls below the WHO Extreme threshold of 11. There is no safe month and no safe state.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart 10 -->
+      <div class="chart-layer">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div class="chart-title">Combined Climate Risk Profile by State</div>
+            <div class="chart-subtitle">Bubble plot · x = average annual temperature · y = median peak UV index · size = average annual rainfall · 2014–2024 combined sources</div>
+          </div>
+          <div id="chart10" class="vega-container"></div>
+          <div class="chart-source">Source: Kaggle — Malaysia Weather Data (1996–2024) · World Bank Climate Knowledge Portal (CCKP)</div>
+        </div>
+        <div class="annotation-col">
+          <div class="annotation-box">
+            <strong>Selangor. UV 14. Temperature above 28°C. Top-right danger zone — alone.</strong>
+            No other state combines both. Perlis sits nearby at UV 13. Sarawak tells the opposite story — the largest bubble on the chart at 3,609 mm of annual rainfall, but sitting further left with cooler temperatures and lower UV. No state sits in the safe bottom-left corner. Every Malaysian state carries at least one significant climate risk. Most carry two or three at once.
           </div>
         </div>
       </div>

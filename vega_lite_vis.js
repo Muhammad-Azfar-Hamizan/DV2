@@ -101,6 +101,12 @@ vegaEmbed("#chart12", vg_12, embedConfig)
   .then(function(result) {})
   .catch(console.error);
 
+// Chart 13: Heatmap — state × month grid, colour = average peak UV index
+var vg_13 = "js/chart13_uv_seasonal_heatmap.vg.json";
+vegaEmbed("#chart13", vg_13, embedConfig)
+  .then(function(result) {})
+  .catch(console.error);
+
 // =============================================================================
 // SECTION 1 SUPPLEMENTARY — Seasonal Rainfall Cycle
 // =============================================================================

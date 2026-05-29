@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 530,
+  "height": 330,
+  "data": {
+    "url": "data/uv_seasonal_heatmap.csv"
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.2
+  },
+  "encoding": {
+    "x": {
+      "field": "month_num",
+      "type": "ordinal",
+      "title": "Month",
+      "sort": [1,2,3,4,5,6,7,8,9,10,11,12],
+      "axis": {
+        "titleFontSize": 11,
+        "titleColor": "#555555",
+        "labelFontSize": 9,
+        "labelColor": "#555555",
+        "domainColor": "#cccccc",
+        "tickColor": "#cccccc",
+        "labelExpr": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value - 1]"
+      }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": null,
+      "sort": ["Selangor","Perlis","Pahang","Sabah","Sarawak","Melaka","Perak","Kedah","Pulau Pinang","Johor","Terengganu","Kelantan","Kuala Lumpur","Putrajaya","Labuan","Negeri Sembilan"],
+      "axis": {
+        "labelFontSize": 9.5,
+        "labelColor": "#333333",
+        "domainColor": "#cccccc",
+        "tickColor": "#cccccc"
+      }
+    },
+    "color": {
+      "field": "avg_uv",
+      "type": "quantitative",
+      "title": "Average Peak UV Index",
+      "scale": {
+        "scheme": "yelloworangered",
+        "domain": [7, 15]
+      },
+      "legend": {
+        "title": "Average Peak UV Index",
+        "titleFontSize": 9.5,
+        "labelFontSize": 9,
+        "titleColor": "#1a1a1a",
+        "labelColor": "#555555",
+        "orient": "bottom",
+        "direction": "horizontal",
+        "gradientLength": 260,
+        "gradientThickness": 10,
+        "offset": 8,
+        "titlePadding": 5
+      }
+    },
+    "tooltip": [
+      { "field": "state",    "type": "nominal",      "title": "State" },
+      { "field": "month",    "type": "nominal",       "title": "Month" },
+      { "field": "avg_uv",   "type": "quantitative",  "title": "Average Peak UV Index", "format": ".1f" }
+    ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": { "stroke": null },
+    "axis": {
+      "labelColor": "#555555",
+      "titleColor": "#1a1a1a",
+      "gridColor": "#e0e0e0",
+      "domainColor": "#cccccc"
+    },
+    "legend": { "labelColor": "#555555", "titleColor": "#1a1a1a" },
+    "title":  { "color": "#1a1a1a", "subtitleColor": "#555555" }
+  }
+}

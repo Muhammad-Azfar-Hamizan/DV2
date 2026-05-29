@@ -1,0 +1,193 @@
+state,month_num,month,avg_uv
+Johor,1,January,11.1
+Johor,2,February,12.67
+Johor,3,March,11.9
+Johor,4,April,11.9
+Johor,5,May,10.8
+Johor,6,June,9.36
+Johor,7,July,10.09
+Johor,8,August,11.8
+Johor,9,September,11.0
+Johor,10,October,12.2
+Johor,11,November,11.33
+Johor,12,December,10.0
+Kedah,1,January,10.3
+Kedah,2,February,12.33
+Kedah,3,March,13.2
+Kedah,4,April,11.5
+Kedah,5,May,10.4
+Kedah,6,June,9.91
+Kedah,7,July,10.0
+Kedah,8,August,11.4
+Kedah,9,September,11.4
+Kedah,10,October,11.2
+Kedah,11,November,10.89
+Kedah,12,December,9.56
+Kelantan,1,January,9.8
+Kelantan,2,February,11.33
+Kelantan,3,March,12.4
+Kelantan,4,April,11.1
+Kelantan,5,May,10.2
+Kelantan,6,June,9.91
+Kelantan,7,July,9.82
+Kelantan,8,August,11.3
+Kelantan,9,September,10.6
+Kelantan,10,October,11.2
+Kelantan,11,November,10.11
+Kelantan,12,December,9.11
+Kuala Lumpur,1,January,11.1
+Kuala Lumpur,2,February,12.22
+Kuala Lumpur,3,March,11.7
+Kuala Lumpur,4,April,11.6
+Kuala Lumpur,5,May,10.5
+Kuala Lumpur,6,June,9.73
+Kuala Lumpur,7,July,10.45
+Kuala Lumpur,8,August,11.7
+Kuala Lumpur,9,September,11.4
+Kuala Lumpur,10,October,12.2
+Kuala Lumpur,11,November,11.56
+Kuala Lumpur,12,December,11.0
+Labuan,1,January,9.7
+Labuan,2,February,11.0
+Labuan,3,March,11.4
+Labuan,4,April,10.7
+Labuan,5,May,9.6
+Labuan,6,June,9.0
+Labuan,7,July,10.18
+Labuan,8,August,11.2
+Labuan,9,September,11.3
+Labuan,10,October,11.9
+Labuan,11,November,10.44
+Labuan,12,December,9.11
+Melaka,1,January,11.2
+Melaka,2,February,12.33
+Melaka,3,March,11.8
+Melaka,4,April,12.1
+Melaka,5,May,10.8
+Melaka,6,June,9.82
+Melaka,7,July,10.45
+Melaka,8,August,12.4
+Melaka,9,September,11.5
+Melaka,10,October,12.4
+Melaka,11,November,11.33
+Melaka,12,December,11.67
+Negeri Sembilan,1,January,8.33
+Negeri Sembilan,2,February,8.67
+Negeri Sembilan,3,March,8.67
+Negeri Sembilan,4,April,8.33
+Negeri Sembilan,5,May,12.0
+Negeri Sembilan,6,June,7.0
+Negeri Sembilan,7,July,9.67
+Negeri Sembilan,8,August,11.0
+Negeri Sembilan,9,September,8.0
+Negeri Sembilan,10,October,7.5
+Negeri Sembilan,11,November,8.0
+Negeri Sembilan,12,December,8.0
+Pahang,1,January,10.8
+Pahang,2,February,12.44
+Pahang,3,March,11.8
+Pahang,4,April,12.1
+Pahang,5,May,11.4
+Pahang,6,June,10.91
+Pahang,7,July,10.82
+Pahang,8,August,11.9
+Pahang,9,September,12.4
+Pahang,10,October,11.4
+Pahang,11,November,11.56
+Pahang,12,December,10.78
+Perak,1,January,10.5
+Perak,2,February,12.67
+Perak,3,March,12.4
+Perak,4,April,12.4
+Perak,5,May,10.7
+Perak,6,June,10.09
+Perak,7,July,10.55
+Perak,8,August,11.9
+Perak,9,September,12.1
+Perak,10,October,12.0
+Perak,11,November,11.67
+Perak,12,December,10.22
+Perlis,1,January,12.0
+Perlis,2,February,10.5
+Perlis,3,March,12.0
+Perlis,4,April,13.67
+Perlis,5,May,13.33
+Perlis,6,June,13.0
+Perlis,7,July,13.67
+Perlis,8,August,14.67
+Perlis,9,September,14.0
+Perlis,10,October,13.5
+Perlis,11,November,12.5
+Perlis,12,December,11.5
+Pulau Pinang,1,January,10.4
+Pulau Pinang,2,February,11.67
+Pulau Pinang,3,March,11.8
+Pulau Pinang,4,April,11.6
+Pulau Pinang,5,May,10.9
+Pulau Pinang,6,June,10.36
+Pulau Pinang,7,July,10.36
+Pulau Pinang,8,August,11.9
+Pulau Pinang,9,September,11.3
+Pulau Pinang,10,October,11.9
+Pulau Pinang,11,November,11.0
+Pulau Pinang,12,December,9.67
+Putrajaya,1,January,9.0
+Putrajaya,2,February,10.5
+Putrajaya,3,March,10.5
+Putrajaya,4,April,11.67
+Putrajaya,5,May,9.0
+Putrajaya,6,June,10.67
+Putrajaya,7,July,9.0
+Putrajaya,8,August,9.67
+Putrajaya,9,September,11.5
+Putrajaya,10,October,12.0
+Putrajaya,11,November,10.0
+Putrajaya,12,December,8.5
+Sabah,1,January,11.3
+Sabah,2,February,12.33
+Sabah,3,March,12.8
+Sabah,4,April,12.9
+Sabah,5,May,11.8
+Sabah,6,June,11.0
+Sabah,7,July,10.82
+Sabah,8,August,12.9
+Sabah,9,September,12.3
+Sabah,10,October,12.8
+Sabah,11,November,11.67
+Sabah,12,December,10.56
+Sarawak,1,January,11.1
+Sarawak,2,February,13.0
+Sarawak,3,March,13.1
+Sarawak,4,April,12.7
+Sarawak,5,May,10.6
+Sarawak,6,June,10.64
+Sarawak,7,July,10.64
+Sarawak,8,August,12.3
+Sarawak,9,September,12.2
+Sarawak,10,October,13.0
+Sarawak,11,November,12.0
+Sarawak,12,December,10.67
+Selangor,1,January,12.9
+Selangor,2,February,12.78
+Selangor,3,March,12.5
+Selangor,4,April,12.4
+Selangor,5,May,11.6
+Selangor,6,June,11.18
+Selangor,7,July,11.0
+Selangor,8,August,11.9
+Selangor,9,September,12.1
+Selangor,10,October,13.2
+Selangor,11,November,12.11
+Selangor,12,December,11.78
+Terengganu,1,January,9.7
+Terengganu,2,February,11.89
+Terengganu,3,March,12.0
+Terengganu,4,April,11.5
+Terengganu,5,May,10.1
+Terengganu,6,June,9.36
+Terengganu,7,July,9.91
+Terengganu,8,August,11.5
+Terengganu,9,September,11.0
+Terengganu,10,October,11.3
+Terengganu,11,November,10.78
+Terengganu,12,December,9.78
